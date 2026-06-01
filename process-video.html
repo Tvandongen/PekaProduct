@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hoe is de Peka App gemaakt?</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green:       #006838;
+    --green-dark:  #004D28;
+    --green-light: #E8F5ED;
+    --green-mid:   #C8E6D0;
+    --accent:      #E8502B;
+    --white:       #ffffff;
+    --gray:        #6b7280;
+    --gray-light:  #f9fafb;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .deck {
+    width: 960px;
+    height: 540px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,.6);
+  }
+
+  /* ── SLIDE BASE ── */
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 56px 64px;
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity .45s ease, transform .45s ease;
+    pointer-events: none;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  /* ── THEMES ── */
+  .theme-green  { background: var(--green); color: var(--white); }
+  .theme-light  { background: var(--green-light); color: #1a1a1a; }
+  .theme-white  { background: var(--white); color: #1a1a1a; }
+  .theme-dark   { background: var(--green-dark); color: var(--white); }
+
+  /* ── TYPOGRAPHY ── */
+  .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .65;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 48px; font-weight: 800; line-height: 1.1; }
+  h2 { font-size: 34px; font-weight: 800; line-height: 1.15; }
+  h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  p  { font-size: 16px; line-height: 1.6; opacity: .85; }
+  .sub { font-size: 18px; opacity: .75; margin-top: 12px; line-height: 1.5; }
+
+  /* ── CHIP / BADGE ── */
+  .chip {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .05em;
+  }
+  .chip-white   { background: rgba(255,255,255,.2); color: #fff; }
+  .chip-green   { background: var(--green); color: #fff; }
+  .chip-accent  { background: var(--accent); color: #fff; }
+  .chip-outline { background: transparent; border: 2px solid var(--green); color: var(--green); }
+
+  /* ── LAYOUT HELPERS ── */
+  .row   { display: flex; gap: 20px; }
+  .col   { flex: 1; }
+  .mt-auto { margin-top: auto; }
+  .mt-6  { margin-top: 24px; }
+  .mt-4  { margin-top: 16px; }
+  .gap-3 { gap: 12px; }
+
+  /* ── CARD ── */
+  .card {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .card.light {
+    background: var(--white);
+    border-color: var(--green-mid);
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+
+  /* ── CODE BLOCK ── */
+  .code {
+    background: rgba(0,0,0,.35);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-family: 'SF Mono', 'Fira Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #a8e6b8;
+    overflow: hidden;
+  }
+  .code .key  { color: #79d4f0; }
+  .code .str  { color: #f4c77a; }
+  .code .cmt  { color: #6c8c70; }
+
+  /* ── STEP INDICATOR ── */
+  .step-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.3);
+    transition: background .3s;
+  }
+  .step-dot.active { background: #fff; }
+  .step-dot.done   { background: rgba(255,255,255,.6); }
+
+  /* ── ICON BOX ── */
+  .icon-box {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .icon-box.green { background: rgba(255,255,255,.15); }
+  .icon-box.light { background: var(--green-light); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    height: 3px;
+    background: rgba(255,255,255,.15);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: auto;
+    margin-bottom: -8px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: rgba(255,255,255,.6);
+    border-radius: 2px;
+    transition: width .45s ease;
+  }
+
+  /* ── NAV CONTROLS ── */
+  .nav {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 999px;
+    padding: 10px 20px;
+    z-index: 100;
+  }
+  .nav button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    transition: background .2s;
+  }
+  .nav button:hover { background: rgba(255,255,255,.15); }
+  .nav button:disabled { opacity: .3; cursor: default; }
+  .nav-counter { color: rgba(255,255,255,.7); font-size: 13px; font-weight: 600; min-width: 48px; text-align: center; }
+  .dots { display: flex; gap: 6px; align-items: center; }
+
+  /* ── SLIDE-SPECIFIC ── */
+
+  /* S1: Title */
+  .s1-logo {
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,.15);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+  .s1-tags { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+
+  /* S2: Brief */
+  .brief-block {
+    background: rgba(255,255,255,.1);
+    border-left: 4px solid rgba(255,255,255,.5);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-size: 17px;
+    line-height: 1.6;
+    font-style: italic;
+    margin: 20px 0;
+  }
+
+  /* S3: Tech stack */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--white);
+    border: 1px solid var(--green-mid);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .tech-icon { font-size: 28px; }
+  .tech-name { font-weight: 700; font-size: 15px; color: #111; }
+  .tech-desc { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+  /* S4: Huisstijl */
+  .color-row { display: flex; gap: 12px; margin-top: 24px; }
+  .swatch {
+    flex: 1;
+    height: 80px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 12px;
+  }
+  .swatch-name { font-size: 11px; font-weight: 700; }
+  .swatch-hex  { font-size: 11px; opacity: .7; font-family: monospace; }
+
+  /* S5: Products */
+  .product-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .product-row {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--green-mid);
+  }
+  .product-emoji { font-size: 22px; }
+  .product-info  { flex: 1; }
+  .product-name  { font-weight: 700; font-size: 14px; color: #111; }
+  .product-cat   { font-size: 11px; color: var(--gray); margin-top: 1px; }
+  .product-badge {
+    font-size: 10px; font-weight: 700;
+    padding: 3px 8px; border-radius: 999px;
+  }
+  .badge-retail    { background: #f3e8ff; color: #7c3aed; }
+  .badge-foodsvc   { background: #dbeafe; color: #1d4ed8; }
+  .badge-consumer  { background: var(--green-light); color: var(--green); }
+  .badge-industry  { background: #ffedd5; color: #c2410c; }
+
+  /* S6: Componenten */
+  .comp-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .comp-row {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,.1);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .comp-file { font-family: monospace; font-size: 13px; color: #a8e6b8; flex: 1; }
+  .comp-desc { font-size: 12px; opacity: .7; }
+
+  /* S7: PWA */
+  .pwa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .pwa-card {
+    background: rgba(255,255,255,.1);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .pwa-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .pwa-card p  { font-size: 12px; opacity: .75; line-height: 1.5; }
+
+  /* S8: Deployment */
+  .deploy-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+  .deploy-step {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--green-mid);
+  }
+  .deploy-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--green); color: #fff;
+    font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .deploy-text  { font-size: 14px; color: #111; font-weight: 600; }
+  .deploy-sub   { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+  /* S9: Result */
+  .result-stats { display: flex; gap: 16px; margin-top: 24px; }
+  .stat-box {
+    flex: 1;
+    background: rgba(255,255,255,.12);
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+  }
+  .stat-num  { font-size: 36px; font-weight: 800; line-height: 1; }
+  .stat-label{ font-size: 12px; opacity: .7; margin-top: 4px; }
+
+  /* S10: End */
+  .end-url {
+    margin-top: 16px;
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-family: monospace;
+    letter-spacing: .03em;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ── S1: TITLE ── -->
+  <div class="slide theme-green active" id="s0">
+    <div class="s1-logo">🥔</div>
+    <div class="label">Peka Kroef · 2025</div>
+    <h1>Hoe is de<br>Peka App<br>gemaakt?</h1>
+    <p class="sub">Van opdracht tot installeerbare<br>iPhone app — stap voor stap.</p>
+    <div class="s1-tags">
+      <span class="chip chip-white">React</span>
+      <span class="chip chip-white">Vite</span>
+      <span class="chip chip-white">Tailwind CSS</span>
+      <span class="chip chip-white">PWA</span>
+      <span class="chip chip-white">Vercel</span>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:10%"></div></div>
+  </div>
+
+  <!-- ── S2: OPDRACHT ── -->
+  <div class="slide theme-dark" id="s1">
+    <div class="label">Stap 1 · De Opdracht</div>
+    <h2>Wat moest er<br>worden gemaakt?</h2>
+    <div class="brief-block">
+      "Maak een nieuw project met de naam productPeka. Dit moet een site opleveren in de huisstijl van Peka Kroef die ook direct als app op een iPhone kan worden geïnstalleerd. In de website wil ik producten van Peka makkelijk kunnen opzoeken."
+    </div>
+    <div class="row mt-4 gap-3">
+      <div class="card col">
+        <div style="font-size:24px;margin-bottom:8px">🎨</div>
+        <h3>Huisstijl</h3>
+        <p>Kleuren, typografie en design overnemen van pekakroef.com</p>
+      </div>
+      <div class="card col">
+        <div style="font-size:24px;margin-bottom:8px">📦</div>
+        <h3>Producten</h3>
+        <p>Alle producten doorzoekbaar en per categorie te filteren</p>
+      </div>
+      <div class="card col">
+        <div style="font-size:24px;margin-bottom:8px">📱</div>
+        <h3>iPhone App</h3>
+        <p>Installeerbaar op het beginscherm als Progressive Web App</p>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:20%"></div></div>
+  </div>
+
+  <!-- ── S3: RESEARCH ── -->
+  <div class="slide theme-light" id="s2">
+    <div class="label">Stap 2 · Research</div>
+    <h2>Website analyseren</h2>
+    <p class="mt-4">Via web search en site scraping zijn alle producten en de huisstijl van pekakroef.com opgehaald.</p>
+    <div class="row mt-6 gap-3">
+      <div class="card light col">
+        <h3>🔍 Producten gevonden</h3>
+        <p style="font-size:14px;margin-top:6px">Retail, Foodservice, Consumenten en Food Industry — in totaal <strong>30 producten</strong> met beschrijving, bereidingswijze en kenmerken.</p>
+      </div>
+      <div class="card light col">
+        <h3>🎨 Huisstijl opgehaald</h3>
+        <p style="font-size:14px;margin-top:6px">Primaire kleur <strong>#006838</strong> (bosgroen), accent <strong>#E8502B</strong> (oranje-rood), witte achtergronden, strak en modern.</p>
+      </div>
+    </div>
+    <div class="code mt-6">
+      <span class="cmt">// Gevonden producten per categorie</span><br>
+      Retail: <span class="str">12 producten</span> &nbsp;·&nbsp; Foodservice: <span class="str">14 producten</span><br>
+      Consumenten: <span class="str">4 producten</span> &nbsp;·&nbsp; Food Industry: <span class="str">2 producten</span>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:30%"></div></div>
+  </div>
+
+  <!-- ── S4: TECH STACK ── -->
+  <div class="slide theme-white" id="s3">
+    <div class="label">Stap 3 · Tech Stack</div>
+    <h2>Welke technologie?</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <div class="tech-icon">⚡</div>
+        <div>
+          <div class="tech-name">Vite + React</div>
+          <div class="tech-desc">Razendsnelle build tool met TypeScript support</div>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">🎨</div>
+        <div>
+          <div class="tech-name">Tailwind CSS</div>
+          <div class="tech-desc">Utility-first CSS — snel en consistent</div>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">🗺️</div>
+        <div>
+          <div class="tech-name">React Router</div>
+          <div class="tech-desc">Navigatie: overzicht → productdetail</div>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">📱</div>
+        <div>
+          <div class="tech-name">PWA (Service Worker)</div>
+          <div class="tech-desc">Installeerbaar op iPhone, werkt offline</div>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:40%"></div></div>
+  </div>
+
+  <!-- ── S5: HUISSTIJL ── -->
+  <div class="slide theme-green" id="s4">
+    <div class="label">Stap 4 · Huisstijl</div>
+    <h2>Kleuren & Design</h2>
+    <p class="sub">Gebaseerd op de visuele identiteit van pekakroef.com</p>
+    <div class="color-row">
+      <div class="swatch" style="background:#006838">
+        <div class="swatch-name" style="color:#fff">Primair groen</div>
+        <div class="swatch-hex" style="color:rgba(255,255,255,.6)">#006838</div>
+      </div>
+      <div class="swatch" style="background:#004D28">
+        <div class="swatch-name" style="color:#fff">Donker groen</div>
+        <div class="swatch-hex" style="color:rgba(255,255,255,.6)">#004D28</div>
+      </div>
+      <div class="swatch" style="background:#E8F5ED;border:1px solid #C8E6D0">
+        <div class="swatch-name" style="color:#006838">Licht groen</div>
+        <div class="swatch-hex" style="color:#4CAF50">#E8F5ED</div>
+      </div>
+      <div class="swatch" style="background:#E8502B">
+        <div class="swatch-name" style="color:#fff">Accent oranje</div>
+        <div class="swatch-hex" style="color:rgba(255,255,255,.6)">#E8502B</div>
+      </div>
+    </div>
+    <div class="row mt-6 gap-3">
+      <div class="card col">
+        <div style="font-size:13px;opacity:.7">Typografie</div>
+        <div style="font-size:16px;font-weight:700;margin-top:4px">-apple-system, Inter, sans-serif</div>
+      </div>
+      <div class="card col">
+        <div style="font-size:13px;opacity:.7">Hoeken</div>
+        <div style="font-size:16px;font-weight:700;margin-top:4px">rounded-xl / rounded-2xl</div>
+      </div>
+      <div class="card col">
+        <div style="font-size:13px;opacity:.7">Categoriebadges</div>
+        <div style="font-size:16px;font-weight:700;margin-top:4px">4 kleuren per segment</div>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:50%"></div></div>
+  </div>
+
+  <!-- ── S6: PRODUCTEN DATA ── -->
+  <div class="slide theme-light" id="s5">
+    <div class="label">Stap 5 · Product Data</div>
+    <h2>30 echte producten</h2>
+    <div class="product-list">
+      <div class="product-row">
+        <div class="product-emoji">🥔</div>
+        <div class="product-info">
+          <div class="product-name">Bistro Minikriel</div>
+          <div class="product-cat">Glutenvrij · 5 wkn houdbaar · 450g</div>
+        </div>
+        <span class="product-badge badge-retail">Retail</span>
+      </div>
+      <div class="product-row">
+        <div class="product-emoji">✨</div>
+        <div class="product-info">
+          <div class="product-name">Pommes Parisienne</div>
+          <div class="product-cat">Stomen 100°C · 18 dgn gekoeld · 2 kg</div>
+        </div>
+        <span class="product-badge badge-foodsvc">Foodservice</span>
+      </div>
+      <div class="product-row">
+        <div class="product-emoji">🍽️</div>
+        <div class="product-info">
+          <div class="product-name">Aardappelgratin 450g</div>
+          <div class="product-cat">Echte room · Oven 180°C · 60% aardappel</div>
+        </div>
+        <span class="product-badge badge-retail">Retail</span>
+      </div>
+      <div class="product-row">
+        <div class="product-emoji">🥣</div>
+        <div class="product-info">
+          <div class="product-name">Aardappelpuree</div>
+          <div class="product-cat">Koelvers · Nootmuskaat · Glutenvrij</div>
+        </div>
+        <span class="product-badge badge-consumer">Consumenten</span>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--gray);margin-top:12px">+ 26 andere producten in de app</div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:60%"></div></div>
+  </div>
+
+  <!-- ── S7: COMPONENTEN ── -->
+  <div class="slide theme-dark" id="s6">
+    <div class="label">Stap 6 · Componenten</div>
+    <h2>De app bouwen</h2>
+    <div class="comp-list">
+      <div class="comp-row">
+        <div class="comp-file">Header.tsx</div>
+        <div class="comp-desc">Sticky header met Peka logo + iOS safe-area fix</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-file">ProductCard.tsx</div>
+        <div class="comp-desc">Kaart met emoji-icoon, categorybadge en houdbaarheid</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-file">CategoryFilter.tsx</div>
+        <div class="comp-desc">Horizontaal scrollbare filterbuttons</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-file">SearchBar.tsx</div>
+        <div class="comp-desc">Zoeken op naam, beschrijving, kenmerken</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-file">ProductDetail.tsx</div>
+        <div class="comp-desc">Detailpagina: bereidingswijzen, kenmerken, CTA</div>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:70%"></div></div>
+  </div>
+
+  <!-- ── S8: PWA ── -->
+  <div class="slide theme-green" id="s7">
+    <div class="label">Stap 7 · Progressive Web App</div>
+    <h2>Installeerbaar<br>op iPhone</h2>
+    <div class="pwa-grid">
+      <div class="pwa-card">
+        <h4>📄 manifest.json</h4>
+        <p>App-naam, icoontje, themakleur en display: standalone — zodat de app er uitziet als een native app.</p>
+      </div>
+      <div class="pwa-card">
+        <h4>⚙️ Service Worker</h4>
+        <p>Cachet de app-bestanden zodat die ook offline beschikbaar is. Cache-versie zorgt voor automatisch vernieuwen bij updates.</p>
+      </div>
+      <div class="pwa-card">
+        <h4>📱 viewport-fit=cover</h4>
+        <p>Viewport vult het hele scherm inclusief notch. pt-safe padding voorkomt overlap met de iPhone statusbalk.</p>
+      </div>
+      <div class="pwa-card">
+        <h4>🛡️ Error Boundary</h4>
+        <p>Vangt runtime fouten op. iOS Private Browsing blokkeert localStorage — dat crashte eerder de app. Nu veilig afgehandeld.</p>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:80%"></div></div>
+  </div>
+
+  <!-- ── S9: DEPLOYMENT ── -->
+  <div class="slide theme-white" id="s8">
+    <div class="label">Stap 8 · Deployment</div>
+    <h2>Live op Vercel</h2>
+    <div class="deploy-steps">
+      <div class="deploy-step">
+        <div class="deploy-num">1</div>
+        <div>
+          <div class="deploy-text">vercel.json aangemaakt</div>
+          <div class="deploy-sub">Build command, output directory en SPA rewrites geconfigureerd</div>
+        </div>
+      </div>
+      <div class="deploy-step">
+        <div class="deploy-num">2</div>
+        <div>
+          <div class="deploy-text">GitHub repository gekoppeld</div>
+          <div class="deploy-sub">tvandongen/PekaProduct → automatische deploys bij iedere push</div>
+        </div>
+      </div>
+      <div class="deploy-step">
+        <div class="deploy-num">3</div>
+        <div>
+          <div class="deploy-text">Vercel detecteert Vite</div>
+          <div class="deploy-sub">npm run build → dist/ → wereldwijd CDN</div>
+        </div>
+      </div>
+      <div class="deploy-step">
+        <div class="deploy-num">4</div>
+        <div>
+          <div class="deploy-text">App installeren op iPhone</div>
+          <div class="deploy-sub">Safari → Deel → Zet op beginscherm → klaar</div>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:90%"></div></div>
+  </div>
+
+  <!-- ── S10: RESULT ── -->
+  <div class="slide theme-green" id="s9">
+    <div class="label">Resultaat</div>
+    <h2>De app is klaar 🎉</h2>
+    <div class="result-stats">
+      <div class="stat-box">
+        <div class="stat-num">30</div>
+        <div class="stat-label">Echte producten</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Categorieën</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">📱</div>
+        <div class="stat-label">Installeerbaar</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">✅</div>
+        <div class="stat-label">Offline werkt</div>
+      </div>
+    </div>
+    <div class="row mt-6 gap-3">
+      <div class="card col">🔍 Zoekbalk op naam, beschrijving &amp; kenmerken</div>
+      <div class="card col">🗂️ Filter op Retail · Foodservice · Consumenten · Industrie</div>
+      <div class="card col">📋 Detailpagina per product met bereidingswijzen</div>
+    </div>
+    <div class="end-url">github.com/tvandongen/PekaProduct</div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:100%"></div></div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="prev" onclick="go(-1)" disabled>‹</button>
+  <div class="dots" id="dots"></div>
+  <span class="nav-counter" id="counter">1 / 10</span>
+  <button id="next" onclick="go(1)">›</button>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'))
+  const dotsEl = document.getElementById('dots')
+  const counter = document.getElementById('counter')
+  const prevBtn = document.getElementById('prev')
+  const nextBtn = document.getElementById('next')
+  let current = 0
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div')
+    d.className = 'step-dot' + (i === 0 ? ' active' : '')
+    d.onclick = () => goTo(i)
+    d.style.cursor = 'pointer'
+    dotsEl.appendChild(d)
+  })
+
+  function goTo(n) {
+    const prev = current
+    current = Math.max(0, Math.min(slides.length - 1, n))
+    if (prev === current) return
+
+    slides[prev].classList.remove('active')
+    slides[prev].classList.add('exit')
+    setTimeout(() => slides[prev].classList.remove('exit'), 500)
+
+    slides[current].classList.add('active')
+
+    const dots = dotsEl.querySelectorAll('.step-dot')
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current)
+      d.classList.toggle('done', i < current)
+    })
+
+    counter.textContent = `${current + 1} / ${slides.length}`
+    prevBtn.disabled = current === 0
+    nextBtn.disabled = current === slides.length - 1
+  }
+
+  function go(dir) { goTo(current + dir) }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1)
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1)
+  })
+
+  // Swipe support
+  let tx = 0
+  document.querySelector('.deck').addEventListener('touchstart', e => { tx = e.touches[0].clientX })
+  document.querySelector('.deck').addEventListener('touchend',   e => {
+    const dx = tx - e.changedTouches[0].clientX
+    if (Math.abs(dx) > 40) go(dx > 0 ? 1 : -1)
+  })
+</script>
+</body>
+</html>
