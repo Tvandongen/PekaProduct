@@ -8,21 +8,37 @@ const categoryColors: Record<string, string> = {
   'food-industry': 'bg-orange-100 text-orange-700',
 }
 
+const subcategoryIcon: Record<string, string> = {
+  'Krieltjes': '🥔',
+  'Hele aardappelen': '🥔',
+  'Gesneden aardappelen': '🔪',
+  'Frites': '🍟',
+  'Puree': '🥣',
+  'Gerechten': '🍽️',
+  'Gekruide aardappelen': '🌿',
+  'Bijgerechten': '✨',
+  'Industrieel': '🏭',
+}
+
 interface ProductCardProps {
   product: Product
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate()
+  const icon = subcategoryIcon[product.subcategory] ?? '🥔'
 
   return (
     <button
       onClick={() => navigate(`/product/${product.id}`)}
       className="w-full bg-white rounded-xl shadow-sm border border-gray-100 p-4 text-left hover:shadow-md hover:border-peka-green transition-all active:scale-[0.98]"
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start gap-3">
+        <div className="w-10 h-10 rounded-xl bg-peka-green-50 flex items-center justify-center text-lg flex-shrink-0">
+          {icon}
+        </div>
         <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap gap-1 mb-2">
+          <div className="flex flex-wrap gap-1 mb-1">
             {product.category.map((cat) => (
               <span
                 key={cat}
@@ -32,14 +48,15 @@ export default function ProductCard({ product }: ProductCardProps) {
               </span>
             ))}
           </div>
-          <h3 className="font-semibold text-gray-900">{product.name}</h3>
-          <p className="text-sm text-gray-500 mt-1 line-clamp-2">{product.description}</p>
-          <div className="flex items-center gap-4 mt-3 text-xs text-gray-400">
+          <h3 className="font-semibold text-gray-900 leading-snug">{product.name}</h3>
+          <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">{product.description}</p>
+          <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
             <span>⏱ {product.shelfLife}</span>
-            <span>📦 {product.subcategory}</span>
+            <span className="text-gray-300">·</span>
+            <span>{product.packaging[0]}</span>
           </div>
         </div>
-        <svg className="w-5 h-5 text-gray-300 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 text-gray-300 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </div>
