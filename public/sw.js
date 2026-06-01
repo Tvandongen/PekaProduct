@@ -1,4 +1,4 @@
-const CACHE_NAME = 'peka-v1';
+const CACHE_NAME = 'peka-v3';
 const STATIC_ASSETS = ['/', '/index.html', '/manifest.json', '/icon.svg'];
 
 self.addEventListener('install', (event) => {

@@ -5,9 +5,21 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
 }
 
+function safeLocalStorage(key: string, value?: string): string | null {
+  try {
+    if (value !== undefined) {
+      localStorage.setItem(key, value)
+      return value
+    }
+    return localStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+
 export default function InstallBanner() {
   const [prompt, setPrompt] = useState<BeforeInstallPromptEvent | null>(null)
-  const [dismissed, setDismissed] = useState(() => localStorage.getItem('peka-install-dismissed') === '1')
+  const [dismissed, setDismissed] = useState(() => safeLocalStorage('peka-install-dismissed') === '1')
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -29,7 +41,7 @@ export default function InstallBanner() {
 
   const dismiss = () => {
     setDismissed(true)
-    localStorage.setItem('peka-install-dismissed', '1')
+    safeLocalStorage('peka-install-dismissed', '1')
   }
 
   return (
