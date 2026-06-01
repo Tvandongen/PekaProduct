@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="36" fill="#006838"/>
+  <ellipse cx="90" cy="98" rx="40" ry="32" fill="#F5C842" opacity="0.9"/>
+  <ellipse cx="90" cy="90" rx="30" ry="23" fill="#F5D060"/>
+  <path d="M90 68 C90 68 74 53 67 46 C67 46 81 45 90 57 C99 45 113 46 113 46 C106 53 90 68 90 68Z" fill="#4CAF50"/>
+  <line x1="90" y1="68" x2="90" y2="78" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="90" y="104" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#006838" text-anchor="middle">PEKA</text>
+</svg>
