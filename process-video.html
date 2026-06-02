@@ -180,18 +180,19 @@
   /* ── NAV CONTROLS ── */
   .nav {
     position: fixed;
-    bottom: 28px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 16px;
-    background: rgba(255,255,255,.1);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(0,0,0,.65);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,.18);
     border-radius: 999px;
     padding: 10px 20px;
-    z-index: 100;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(0,0,0,.4);
   }
   .nav button {
     background: none;
@@ -717,16 +718,18 @@
   <div class="slide theme-dark" id="scA">
     <div class="label">Code generatie · 1 van 2</div>
     <h2>Van opdracht naar code</h2>
-    <div class="row mt-4 gap-3" style="flex:1;align-items:stretch">
+    <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
 
-      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-bottom:2px">src/data/products.ts</div>
-        <div class="code" style="font-size:11px;flex:1">
-<span class="cmt">// Interface — gegenereerd op basis van website-analyse</span>
+      <!-- Kolom 1: products.ts -->
+      <div style="flex:1.1;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5">src/data/products.ts</div>
+        <div class="code" style="font-size:12.5px;flex:1;line-height:1.65">
+<span class="cmt">// TypeScript interface — structuur van elk product</span>
 <span class="key">export interface</span> Product {
   id:          <span class="str">string</span>
   name:        <span class="str">string</span>
-  category:    <span class="str">string[]</span>
+  description: <span class="str">string</span>
+  category:    <span class="str">string[]</span>  <span class="cmt">// meerdere mogelijk</span>
   subcategory: <span class="str">string</span>
   preparation: <span class="str">string[]</span>
   shelfLife:   <span class="str">string</span>
@@ -734,47 +737,57 @@
   features:    <span class="str">string[]</span>
 }
 
-<span class="cmt">// 30 echte producten — bijv. Pommes Parisienne:</span>
+<span class="cmt">// Voorbeeld — één van de 30 producten:</span>
 {
-  id: <span class="str">'pommes-parisienne'</span>,
-  name: <span class="str">'Pommes Parisienne'</span>,
-  category: [<span class="str">'foodservice'</span>],
+  id:          <span class="str">'pommes-parisienne'</span>,
+  name:        <span class="str">'Pommes Parisienne'</span>,
+  category:    [<span class="str">'foodservice'</span>],
   subcategory: <span class="str">'Bijgerechten'</span>,
   preparation: [
     <span class="str">'Stomen (100°C, 10 min)'</span>,
     <span class="str">'Magnetron (1 min/100g)'</span>,
+    <span class="str">'Bakken in boter'</span>,
   ],
-  shelfLife: <span class="str">'18 dagen gekoeld'</span>,
-  features: [<span class="str">'Glutenvrij'</span>, <span class="str">'Lactosevrij'</span>, ...],
+  shelfLife:   <span class="str">'18 dagen gekoeld'</span>,
+  packaging:   [<span class="str">'2 kg'</span>, <span class="str">'5 kg'</span>],
+  features:    [<span class="str">'Glutenvrij'</span>, <span class="str">'Lactosevrij'</span>,
+                <span class="str">'Voorgekookt'</span>, <span class="str">'Geen toevoegingen'</span>],
 }
         </div>
       </div>
 
-      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-bottom:2px">tailwind.config.ts + index.css</div>
-        <div class="code" style="font-size:11px">
-<span class="cmt">// Peka-kleuren als Tailwind tokens</span>
-colors: {
-  peka: {
-    green:       <span class="str">'#006838'</span>,
-    <span class="str">'green-dark'</span>: <span class="str">'#004D28'</span>,
-    <span class="str">'green-50'</span>:   <span class="str">'#E8F5ED'</span>,
-    accent:      <span class="str">'#E8502B'</span>,
+      <!-- Kolom 2: tailwind + zoekhaak -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5">tailwind.config.ts — Peka kleurtokens</div>
+        <div class="code" style="font-size:12.5px;line-height:1.65">
+<span class="key">theme</span>: {
+  <span class="key">extend</span>: {
+    <span class="key">colors</span>: {
+      <span class="key">peka</span>: {
+        green:         <span class="str">'#006838'</span>,  <span class="cmt">// bosgroen</span>
+        <span class="str">'green-dark'</span>:  <span class="str">'#004D28'</span>,  <span class="cmt">// donker</span>
+        <span class="str">'green-50'</span>:    <span class="str">'#E8F5ED'</span>,  <span class="cmt">// achtergrond</span>
+        <span class="str">'green-100'</span>:   <span class="str">'#C8E6D0'</span>,  <span class="cmt">// rand</span>
+        accent:        <span class="str">'#E8502B'</span>,  <span class="cmt">// oranje CTA</span>
+      }
+    }
   }
 }
         </div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin:6px 0 2px">src/hooks/useProducts.ts</div>
-        <div class="code" style="font-size:11px">
-<span class="cmt">// Zoeklogica — multi-veld, case-insensitive</span>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-top:6px">src/hooks/useProducts.ts — zoeklogica</div>
+        <div class="code" style="font-size:12.5px;line-height:1.65;flex:1">
+<span class="cmt">// Zoekt in meerdere velden tegelijk</span>
 <span class="key">const</span> filtered = products.<span class="key">filter</span>(p => {
   <span class="key">const</span> q = query.toLowerCase()
   <span class="key">return</span> [
-    p.name, p.description,
+    p.name,
+    p.description,
     p.subcategory,
     ...p.features,
     ...p.preparation,
-  ].<span class="key">some</span>(f => f.toLowerCase()
-        .<span class="key">includes</span>(q))
+  ].<span class="key">some</span>(veld =>
+    veld.toLowerCase().<span class="key">includes</span>(q)
+  )
 })
         </div>
       </div>
@@ -787,27 +800,32 @@ colors: {
   <div class="slide theme-white" id="scB">
     <div class="label">Code generatie · 2 van 2</div>
     <h2>Componenten &amp; iOS fixes</h2>
-    <div class="row mt-4 gap-3" style="align-items:stretch">
+    <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
 
+      <!-- Kolom 1: safe-area -->
       <div style="flex:1;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">Header.tsx — safe-area fix</div>
-        <div class="code" style="font-size:11.5px;flex:1">
-<span class="cmt">/* iOS statusbalk overlapte de header.
-   Opgelost met env(safe-area-inset-top) */</span>
+        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">index.css + Header.tsx — iOS statusbalk fix</div>
+        <div class="code" style="font-size:12.5px;flex:1;line-height:1.65">
+<span class="cmt">/* Probleem: iOS statusbalk overlapte de header
+   omdat de app het hele scherm vult (notch).
+
+   Oplossing: CSS utility die automatisch de
+   juiste padding berekent voor elk iPhone-model */</span>
 
 <span class="cmt">/* index.css */</span>
 .<span class="key">pt-safe</span> {
   padding-top: <span class="key">max</span>(
-    <span class="str">0.75rem</span>,
-    <span class="key">env</span>(safe-area-inset-top)
+    <span class="str">0.75rem</span>,               <span class="cmt">/* minimaal 12px */</span>
+    <span class="key">env</span>(safe-area-inset-top) <span class="cmt">/* iPhone notch */</span>
   );
 }
 
-<span class="cmt">// Header.tsx</span>
-&lt;<span class="key">header</span> className=<span class="str">"bg-peka-green sticky top-0"</span>&gt;
+<span class="cmt">/* Header.tsx — pt-safe zorgt voor juiste ruimte */</span>
+&lt;<span class="key">header</span> className=<span class="str">"bg-peka-green sticky top-0 z-50"</span>&gt;
   &lt;<span class="key">div</span> className=<span class="str">"pt-safe"</span>&gt;
-    &lt;<span class="key">div</span> className=<span class="str">"px-4 py-3 flex gap-3"</span>&gt;
-      &lt;<span class="key">img</span> src=<span class="str">"/icon.svg"</span> /&gt;
+    &lt;<span class="key">div</span> className=<span class="str">"max-w-2xl mx-auto px-4 py-3
+                    flex items-center gap-3"</span>&gt;
+      &lt;<span class="key">img</span> src=<span class="str">"/icon.svg"</span> className=<span class="str">"w-9 h-9"</span> /&gt;
       &lt;<span class="key">h1</span>&gt;Peka Kroef&lt;/<span class="key">h1</span>&gt;
     &lt;/&gt;
   &lt;/&gt;
@@ -815,33 +833,42 @@ colors: {
         </div>
       </div>
 
+      <!-- Kolom 2: ErrorBoundary + localStorage -->
       <div style="flex:1;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">ErrorBoundary.tsx — witte pagina fix</div>
-        <div class="code" style="font-size:11.5px">
-<span class="cmt">/* iOS Private Browsing gooit SecurityError
-   op localStorage → hele app crashte.
-   ErrorBoundary vangt dit op: */</span>
+        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">ErrorBoundary.tsx — witte pagina voorkomen</div>
+        <div class="code" style="font-size:12.5px;line-height:1.65">
+<span class="cmt">/* iOS Private Browsing blokkeert localStorage.
+   Zonder deze class → hele app crasht → witte pagina.
+   Met ErrorBoundary → vriendelijke foutmelding. */</span>
 
 <span class="key">class</span> ErrorBoundary <span class="key">extends</span> Component {
-  <span class="key">static</span> getDerivedStateFromError(e) {
-    <span class="key">return</span> { error: e }
+  state = { error: <span class="key">null</span> }
+
+  <span class="key">static</span> getDerivedStateFromError(e: Error) {
+    <span class="key">return</span> { error: e }  <span class="cmt">// fout opvangen</span>
   }
   render() {
     <span class="key">if</span> (<span class="key">this</span>.state.error)
-      <span class="key">return</span> &lt;<span class="key">ReloadScreen</span> /&gt;
-    <span class="key">return this</span>.props.children
+      <span class="key">return</span> &lt;<span class="key">ReloadButton</span> /&gt;  <span class="cmt">// toon knop</span>
+    <span class="key">return this</span>.props.children   <span class="cmt">// normaal</span>
   }
 }
         </div>
-        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase;margin-top:8px">InstallBanner.tsx — localStorage veilig</div>
-        <div class="code" style="font-size:11.5px">
-<span class="cmt">// Veilige wrapper — gooit nooit een exception</span>
-<span class="key">function</span> safeStorage(key, val?) {
+        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase;margin-top:10px">InstallBanner.tsx — veilige localStorage toegang</div>
+        <div class="code" style="font-size:12.5px;line-height:1.65;flex:1">
+<span class="cmt">// try/catch rondom localStorage zodat
+// een SecurityError de app niet meer neergooit</span>
+<span class="key">function</span> safeStorage(
+  key: <span class="str">string</span>,
+  value?: <span class="str">string</span>
+): <span class="str">string | null</span> {
   <span class="key">try</span> {
-    <span class="key">return</span> val
-      ? localStorage.setItem(key, val)
-      : localStorage.getItem(key)
-  } <span class="key">catch</span> { <span class="key">return null</span> }
+    <span class="key">if</span> (value !== <span class="key">undefined</span>)
+      localStorage.<span class="key">setItem</span>(key, value)
+    <span class="key">return</span> localStorage.<span class="key">getItem</span>(key)
+  } <span class="key">catch</span> {
+    <span class="key">return null</span>  <span class="cmt">// stil falen, geen crash</span>
+  }
 }
         </div>
       </div>
