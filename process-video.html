@@ -840,88 +840,208 @@ colors: {
     <div class="progress-bar mt-auto"><div class="progress-fill" style="width:63%"></div></div>
   </div>
 
-  <!-- ── GITHUB ── -->
-  <div class="slide theme-green" id="scG">
-    <div class="label">GitHub integratie</div>
-    <h2>Automatisch naar<br>GitHub gepusht</h2>
-    <div class="row mt-5 gap-4" style="flex:1;align-items:stretch">
+  <!-- ── GITHUB 1: WAT IS GITHUB ── -->
+  <div class="slide theme-dark" id="scG1">
+    <div class="label">GitHub · 1 van 3</div>
+    <h2>Wat is GitHub?</h2>
+    <p class="sub" style="margin-bottom:20px">GitHub is een online platform waar code wordt opgeslagen, bijgehouden en gedeeld — vergelijkbaar met Google Drive, maar specifiek voor software.</p>
+    <div class="row gap-3" style="flex:1;align-items:stretch">
+      <div class="card col" style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:28px">📁</div>
+        <h3>Repository</h3>
+        <p>Een <em>repository</em> (repo) is de map met alle code van een project. Alle bestanden van de Peka app staan in één repo: <strong>tvandongen/PekaProduct</strong>.</p>
+      </div>
+      <div class="card col" style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:28px">🕐</div>
+        <h3>Versiegeschiedenis</h3>
+        <p>Elke wijziging wordt opgeslagen als een <em>commit</em> — een momentopname. Je kunt altijd terug naar een eerdere versie. Niets gaat verloren.</p>
+      </div>
+      <div class="card col" style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:28px">🌿</div>
+        <h3>Branches</h3>
+        <p>Een <em>branch</em> is een aparte werklijn. Claude werkte op branch <strong>claude/amazing-brahmagupta-heVfW</strong>, los van de hoofdcode op <strong>main</strong>.</p>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:62%"></div></div>
+  </div>
 
-      <!-- Commit history -->
-      <div style="flex:1.2;display:flex;flex-direction:column;gap:0">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-bottom:8px">git log — commit history</div>
-        <div class="code" style="font-size:10.5px;flex:1;line-height:2">
-<span style="color:#79d4f0">c5f0b92</span> <span class="str">Add 3 iPhone mockup slides</span>
-<span style="color:#79d4f0">64e61fe</span> <span class="str">Add timing slide to presentation</span>
-<span style="color:#79d4f0">e8c179b</span> <span class="str">Fix white page on iOS Safari</span>
-  <span class="cmt">↳ localStorage try/catch</span>
-  <span class="cmt">↳ Service worker cache → peka-v3</span>
-  <span class="cmt">↳ ErrorBoundary toegevoegd</span>
-<span style="color:#79d4f0">cd6940f</span> <span class="str">Expand product catalog + branding</span>
-  <span class="cmt">↳ 30 Peka Kroef producten</span>
-  <span class="cmt">↳ Hero banner, ProductCard</span>
-<span style="color:#79d4f0">f44415b</span> <span class="str">Add Vercel deployment config</span>
-  <span class="cmt">↳ vercel.json, rewrites, headers</span>
-<span style="color:#79d4f0">e3a9c12</span> <span class="str">Initial project — productPeka</span>
-  <span class="cmt">↳ React + Vite + Tailwind + PWA</span>
+  <!-- ── GITHUB 2: HOE CLAUDE INTERACTEERT ── -->
+  <div class="slide theme-white" id="scG2">
+    <div class="label">GitHub · 2 van 3</div>
+    <h2>Hoe werkt Claude<br>met de code?</h2>
+    <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
+
+      <!-- Flow diagram -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;flex-direction:column;gap:4px">
+
+          <div style="background:var(--green);color:#fff;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+            <div style="font-size:22px;flex-shrink:0">💬</div>
+            <div>
+              <div style="font-size:13px;font-weight:800">Jij typt een opdracht</div>
+              <div style="font-size:11px;opacity:.75;margin-top:1px">"Voeg alle producten toe van pekakroef.com"</div>
+            </div>
+          </div>
+
+          <div style="text-align:center;font-size:20px;color:#006838;line-height:1.2">↓</div>
+
+          <div style="background:var(--green-light);border:1px solid var(--green-mid);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+            <div style="font-size:22px;flex-shrink:0">🔍</div>
+            <div>
+              <div style="font-size:13px;font-weight:800">Claude leest de bestaande code</div>
+              <div style="font-size:11px;color:var(--gray);margin-top:1px">Opent en analyseert <code style="font-size:10px;background:#fff;padding:1px 4px;border-radius:3px">src/data/products.ts</code>, begrijpt de structuur</div>
+            </div>
+          </div>
+
+          <div style="text-align:center;font-size:20px;color:#006838;line-height:1.2">↓</div>
+
+          <div style="background:var(--green-light);border:1px solid var(--green-mid);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+            <div style="font-size:22px;flex-shrink:0">✏️</div>
+            <div>
+              <div style="font-size:13px;font-weight:800">Claude schrijft nieuwe code</div>
+              <div style="font-size:11px;color:var(--gray);margin-top:1px">Overschrijft of past het bestand aan — precies als een developer</div>
+            </div>
+          </div>
+
+          <div style="text-align:center;font-size:20px;color:#006838;line-height:1.2">↓</div>
+
+          <div style="background:#111;color:#fff;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+            <div style="font-size:22px;flex-shrink:0">📦</div>
+            <div>
+              <div style="font-size:13px;font-weight:800">git commit &amp; push naar GitHub</div>
+              <div style="font-size:11px;opacity:.65;margin-top:1px">Claude voert de git-commando's zelf uit in de terminal</div>
+            </div>
+          </div>
+
+          <div style="text-align:center;font-size:20px;color:#006838;line-height:1.2">↓</div>
+
+          <div style="background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+            <div style="font-size:22px;flex-shrink:0">🚀</div>
+            <div>
+              <div style="font-size:13px;font-weight:800">Vercel pikt de push op → app live</div>
+              <div style="font-size:11px;opacity:.8;margin-top:1px">Automatisch herbouwen &amp; deployen zonder extra actie</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Workflow -->
-      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-bottom:0px">workflow</div>
-        <div class="card" style="display:flex;align-items:center;gap:12px">
-          <div style="font-size:22px">💬</div>
-          <div>
-            <div style="font-size:13px;font-weight:700">Opdracht in chat</div>
-            <div style="font-size:11px;opacity:.7;margin-top:2px">Gebruiker beschrijft wat er nodig is</div>
-          </div>
+      <!-- Uitleg rechts -->
+      <div style="flex:0 0 220px;display:flex;flex-direction:column;gap:12px">
+        <div style="background:var(--green-light);border:1px solid var(--green-mid);border-radius:12px;padding:14px">
+          <div style="font-size:13px;font-weight:800;color:var(--green);margin-bottom:6px">🤖 Wat Claude doet</div>
+          <ul style="font-size:12px;color:#374151;line-height:1.8;padding-left:14px">
+            <li>Bestanden lezen &amp; schrijven</li>
+            <li>Fouten opsporen &amp; herstellen</li>
+            <li>Terminalopdrachten uitvoeren</li>
+            <li>Code committen &amp; pushen</li>
+          </ul>
         </div>
-        <div style="text-align:center;opacity:.4;font-size:18px">↓</div>
-        <div class="card" style="display:flex;align-items:center;gap:12px">
-          <div style="font-size:22px">🤖</div>
-          <div>
-            <div style="font-size:13px;font-weight:700">AI schrijft &amp; bewerkt code</div>
-            <div style="font-size:11px;opacity:.7;margin-top:2px">Bestanden aanmaken, aanpassen, debuggen</div>
-          </div>
+        <div style="background:var(--green-light);border:1px solid var(--green-mid);border-radius:12px;padding:14px">
+          <div style="font-size:13px;font-weight:800;color:var(--green);margin-bottom:6px">👤 Wat jij doet</div>
+          <ul style="font-size:12px;color:#374151;line-height:1.8;padding-left:14px">
+            <li>Opdracht geven in gewone taal</li>
+            <li>Resultaat beoordelen</li>
+            <li>Bijsturen indien nodig</li>
+          </ul>
         </div>
-        <div style="text-align:center;opacity:.4;font-size:18px">↓</div>
-        <div class="card" style="display:flex;align-items:center;gap:12px">
-          <div style="font-size:22px">📦</div>
-          <div>
-            <div style="font-size:13px;font-weight:700">git commit &amp; push</div>
-            <div style="font-size:11px;opacity:.7;margin-top:2px">Elke stap direct naar GitHub branch</div>
-          </div>
-        </div>
-        <div style="text-align:center;opacity:.4;font-size:18px">↓</div>
-        <div class="card" style="display:flex;align-items:center;gap:12px">
-          <div style="font-size:22px">🚀</div>
-          <div>
-            <div style="font-size:13px;font-weight:700">Vercel deploy</div>
-            <div style="font-size:11px;opacity:.7;margin-top:2px">Automatisch live bij elke push naar main</div>
-          </div>
-        </div>
-        <div style="margin-top:4px;background:rgba(255,255,255,.12);border-radius:10px;padding:9px 12px;font-size:11px;font-family:monospace;letter-spacing:.02em">
-          github.com/tvandongen/PekaProduct<br>
-          <span style="opacity:.6">branch: claude/amazing-brahmagupta-heVfW</span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:10px;text-align:center">
-            <div style="font-size:24px;font-weight:800;line-height:1">1 055</div>
-            <div style="font-size:10px;opacity:.7;margin-top:3px">regels code</div>
-          </div>
-          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:10px;text-align:center">
-            <div style="font-size:24px;font-weight:800;line-height:1">16</div>
-            <div style="font-size:10px;opacity:.7;margin-top:3px">bestanden</div>
-          </div>
-          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:10px;text-align:center">
-            <div style="font-size:24px;font-weight:800;line-height:1">6</div>
-            <div style="font-size:10px;opacity:.7;margin-top:3px">commits</div>
-          </div>
+        <div style="background:#111;border-radius:12px;padding:12px;font-size:10px;font-family:monospace;color:#a8e6b8;line-height:1.6">
+          <span style="color:#79d4f0">$</span> git add -A<br>
+          <span style="color:#79d4f0">$</span> git commit -m <span style="color:#f4c77a">"Fix..."</span><br>
+          <span style="color:#79d4f0">$</span> git push origin<br>
+          <span style="color:#6c8c70"># → GitHub ontvangt code</span>
         </div>
       </div>
 
     </div>
-    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:68%"></div></div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:65%"></div></div>
+  </div>
+
+  <!-- ── GITHUB 3: COMMIT HISTORY ── -->
+  <div class="slide theme-green" id="scG3">
+    <div class="label">GitHub · 3 van 3</div>
+    <h2>Commit history —<br>elke stap bewaard</h2>
+    <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
+
+      <!-- Commits als kaarten -->
+      <div style="flex:1.3;display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:2px">↑ nieuwste &nbsp;·&nbsp; tvandongen/PekaProduct &nbsp;·&nbsp; 6 commits</div>
+
+        <div style="background:rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px">
+          <div style="font-family:monospace;font-size:10px;color:#79d4f0;flex-shrink:0;padding-top:2px">5886485</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:700">Expand presentation: code blocks &amp; GitHub</div>
+            <div style="font-size:10px;opacity:.6;margin-top:2px">Codeslides, GitHub uitleg, regelenteller toegevoegd</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px">
+          <div style="font-family:monospace;font-size:10px;color:#79d4f0;flex-shrink:0;padding-top:2px">c5f0b92</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:700">Add 3 iPhone mockup slides to presentation</div>
+            <div style="font-size:10px;opacity:.6;margin-top:2px">Home, zoeken/filteren en productdetail als phone-mockup</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px">
+          <div style="font-family:monospace;font-size:10px;color:#79d4f0;flex-shrink:0;padding-top:2px">e8c179b</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:700">Fix white page on iOS Safari</div>
+            <div style="font-size:10px;opacity:.6;margin-top:2px">localStorage try/catch · service worker peka-v3 · ErrorBoundary</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px">
+          <div style="font-family:monospace;font-size:10px;color:#79d4f0;flex-shrink:0;padding-top:2px">cd6940f</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:700">Expand product catalog + improve branding</div>
+            <div style="font-size:10px;opacity:.6;margin-top:2px">30 echte producten · hero banner · verbeterde ProductCard</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px">
+          <div style="font-family:monospace;font-size:10px;color:#79d4f0;flex-shrink:0;padding-top:2px">f44415b</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:700">Add Vercel deployment configuration</div>
+            <div style="font-size:10px;opacity:.6;margin-top:2px">vercel.json met build command, SPA rewrites en headers</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px">
+          <div style="font-family:monospace;font-size:10px;color:#79d4f0;flex-shrink:0;padding-top:2px">e3a9c12</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:700">Initial project — productPeka 🥔</div>
+            <div style="font-size:10px;opacity:.6;margin-top:2px">React · Vite · Tailwind · PWA · 16 bestanden in één keer</div>
+          </div>
+          <div style="font-size:9px;background:rgba(255,255,255,.2);padding:2px 6px;border-radius:999px;flex-shrink:0;align-self:center">start</div>
+        </div>
+
+        <div style="font-size:10px;opacity:.5;margin-top:2px;padding-left:2px">↓ oudste</div>
+      </div>
+
+      <!-- Stats + uitleg -->
+      <div style="flex:0 0 210px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:8px">
+          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:28px;font-weight:800;line-height:1">1 055</div>
+            <div style="font-size:9px;opacity:.7;margin-top:3px">regels code</div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:28px;font-weight:800;line-height:1">16</div>
+            <div style="font-size:9px;opacity:.7;margin-top:3px">bestanden</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:14px;font-size:12px;line-height:1.7">
+          <div style="font-weight:800;margin-bottom:6px">💡 Wat is een commit?</div>
+          Een commit is een <strong>opgeslagen momentopname</strong> van de code. Elke commit heeft een unieke code (hash) en een beschrijving van wat er veranderd is. Zo zie je precies wat, wanneer en waarom iets is gewijzigd.
+        </div>
+        <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:14px;font-size:12px;line-height:1.7">
+          <div style="font-weight:800;margin-bottom:6px">🌿 Wat is een branch?</div>
+          Claude werkte op een <strong>eigen branch</strong> — een aparte kopie van het project. Zo blijft de hoofdversie veilig totdat de wijzigingen zijn goedgekeurd.
+        </div>
+      </div>
+
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:70%"></div></div>
   </div>
 
   <!-- ── MOCKUP A: HOME SCHERM ── -->
@@ -1391,7 +1511,7 @@ colors: {
 <div class="nav">
   <button id="prev" onclick="go(-1)" disabled>‹</button>
   <div class="dots" id="dots"></div>
-  <span class="nav-counter" id="counter">1 / 17</span>
+  <span class="nav-counter" id="counter">1 / 19</span>
   <button id="next" onclick="go(1)">›</button>
 </div>
 
