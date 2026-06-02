@@ -20,21 +20,31 @@
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #111;
+    background: #1a1a1a;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
   }
 
+  .deck-wrapper {
+    width: 96vw;
+    height: 96vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .deck {
-    width: 960px;
-    height: 540px;
+    /* 16:9, fills viewport while keeping aspect ratio */
+    width: min(96vw, 96vh * 16 / 9);
+    height: min(96vh, 96vw * 9 / 16);
     position: relative;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 40px 80px rgba(0,0,0,.6);
+    box-shadow: 0 24px 60px rgba(0,0,0,.7);
   }
 
   /* ── SLIDE BASE ── */
@@ -43,7 +53,7 @@
     inset: 0;
     display: flex;
     flex-direction: column;
-    padding: 56px 64px;
+    padding: 4.5% 5.5%;
     opacity: 0;
     transform: translateX(60px);
     transition: opacity .45s ease, transform .45s ease;
@@ -67,18 +77,18 @@
 
   /* ── TYPOGRAPHY ── */
   .label {
-    font-size: 11px;
+    font-size: clamp(10px, 1.1vw, 13px);
     font-weight: 700;
     letter-spacing: .12em;
     text-transform: uppercase;
     opacity: .65;
     margin-bottom: 12px;
   }
-  h1 { font-size: 48px; font-weight: 800; line-height: 1.1; }
-  h2 { font-size: 34px; font-weight: 800; line-height: 1.15; }
-  h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-  p  { font-size: 16px; line-height: 1.6; opacity: .85; }
-  .sub { font-size: 18px; opacity: .75; margin-top: 12px; line-height: 1.5; }
+  h1 { font-size: clamp(38px, 4.5vw, 58px); font-weight: 800; line-height: 1.1; }
+  h2 { font-size: clamp(26px, 3.2vw, 42px); font-weight: 800; line-height: 1.15; }
+  h3 { font-size: clamp(16px, 1.8vw, 24px); font-weight: 700; margin-bottom: 8px; }
+  p  { font-size: clamp(13px, 1.4vw, 18px); line-height: 1.6; opacity: .85; }
+  .sub { font-size: clamp(14px, 1.6vw, 20px); opacity: .75; margin-top: 12px; line-height: 1.5; }
 
   /* ── CHIP / BADGE ── */
   .chip {
@@ -487,7 +497,7 @@
 </head>
 <body>
 
-<div class="deck">
+<div class="deck-wrapper"><div class="deck">
 
   <!-- ── S1: TITLE ── -->
   <div class="slide theme-green active" id="s0">
@@ -1505,7 +1515,7 @@ colors: {
     <div class="progress-bar mt-auto"><div class="progress-fill" style="width:100%"></div></div>
   </div>
 
-</div><!-- /deck -->
+</div></div><!-- /deck /deck-wrapper -->
 
 <!-- Navigation -->
 <div class="nav">
