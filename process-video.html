@@ -714,117 +714,126 @@
     <div class="progress-bar mt-auto"><div class="progress-fill" style="width:70%"></div></div>
   </div>
 
-  <!-- ── CODE A: GEGENEREERDE CODE ── -->
+  <!-- ── CODE A: PRODUCTDATA & ZOEK ── -->
   <div class="slide theme-dark" id="scA">
-    <div class="label">Code generatie · 1 van 2</div>
-    <h2>Van opdracht naar code</h2>
-    <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
+    <div class="label">Code generatie &middot; 1 van 3</div>
+    <h2 style="margin-bottom:10px">Productdata &amp; zoeklogica</h2>
+    <div class="row gap-4" style="flex:1;align-items:stretch;min-height:0">
 
-      <!-- Kolom 1: products.ts -->
-      <div style="flex:1.1;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5">src/data/products.ts</div>
-        <div class="code" style="font-size:12.5px;flex:1;line-height:1.65">
-<span class="cmt">// TypeScript interface — structuur van elk product</span>
+      <div style="flex:1.15;display:flex;flex-direction:column;gap:6px;min-height:0">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.5">src/data/products.ts &mdash; interface + voorbeeld</div>
+        <div class="code" style="font-size:12.5px;flex:1;overflow:hidden;line-height:1.65">
+<span class="cmt">// TypeScript interface &mdash; structuur van elk product</span>
 <span class="key">export interface</span> Product {
-  id:          <span class="str">string</span>
-  name:        <span class="str">string</span>
-  description: <span class="str">string</span>
-  category:    <span class="str">string[]</span>  <span class="cmt">// meerdere mogelijk</span>
-  subcategory: <span class="str">string</span>
-  preparation: <span class="str">string[]</span>
-  shelfLife:   <span class="str">string</span>
-  packaging:   <span class="str">string[]</span>
-  features:    <span class="str">string[]</span>
+  id:              <span class="str">string</span>
+  name:            <span class="str">string</span>
+  description:     <span class="str">string</span>
+  longDescription: <span class="str">string</span>
+  category:        <span class="str">string[]</span>   <span class="cmt">// retail | foodservice | &hellip;</span>
+  subcategory:     <span class="str">string</span>
+  preparation:     <span class="str">string[]</span>
+  shelfLife:       <span class="str">string</span>
+  packaging:       <span class="str">string[]</span>
+  features:        <span class="str">string[]</span>
 }
 
-<span class="cmt">// Voorbeeld — één van de 30 producten:</span>
+<span class="cmt">// &eacute;&eacute;n van de 30 producten &mdash; Pommes Parisienne:</span>
 {
   id:          <span class="str">'pommes-parisienne'</span>,
   name:        <span class="str">'Pommes Parisienne'</span>,
+  description: <span class="str">'Kleine ronde balletjes, ideaal voor stomen.'</span>,
   category:    [<span class="str">'foodservice'</span>],
   subcategory: <span class="str">'Bijgerechten'</span>,
   preparation: [
-    <span class="str">'Stomen (100°C, 10 min)'</span>,
-    <span class="str">'Magnetron (1 min/100g)'</span>,
+    <span class="str">'Stomen (100&deg;C, 10 min)'</span>,
+    <span class="str">'Magnetron (1 min per 100g)'</span>,
     <span class="str">'Bakken in boter'</span>,
   ],
   shelfLife:   <span class="str">'18 dagen gekoeld'</span>,
   packaging:   [<span class="str">'2 kg'</span>, <span class="str">'5 kg'</span>],
-  features:    [<span class="str">'Glutenvrij'</span>, <span class="str">'Lactosevrij'</span>,
-                <span class="str">'Voorgekookt'</span>, <span class="str">'Geen toevoegingen'</span>],
-}
+  features:    [
+    <span class="str">'Glutenvrij'</span>,    <span class="str">'Lactosevrij'</span>,
+    <span class="str">'Voorgekookt'</span>,  <span class="str">'Geen toevoegingen'</span>,
+    <span class="str">'Verfijnd uiterlijk'</span>,
+  ],
+},  <span class="cmt">// &hellip; nog 29 producten &hellip;</span>
         </div>
       </div>
 
-      <!-- Kolom 2: tailwind + zoekhaak -->
-      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5">tailwind.config.ts — Peka kleurtokens</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-height:0">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.5">src/hooks/useProducts.ts &mdash; zoeklogica</div>
         <div class="code" style="font-size:12.5px;line-height:1.65">
-<span class="key">theme</span>: {
-  <span class="key">extend</span>: {
-    <span class="key">colors</span>: {
-      <span class="key">peka</span>: {
-        green:         <span class="str">'#006838'</span>,  <span class="cmt">// bosgroen</span>
-        <span class="str">'green-dark'</span>:  <span class="str">'#004D28'</span>,  <span class="cmt">// donker</span>
-        <span class="str">'green-50'</span>:    <span class="str">'#E8F5ED'</span>,  <span class="cmt">// achtergrond</span>
-        <span class="str">'green-100'</span>:   <span class="str">'#C8E6D0'</span>,  <span class="cmt">// rand</span>
-        accent:        <span class="str">'#E8502B'</span>,  <span class="cmt">// oranje CTA</span>
-      }
+<span class="cmt">// Zoekt tegelijk in naam, beschrijving,</span>
+<span class="cmt">// subcategorie, kenmerken &eacute;n bereidingswijzen</span>
+<span class="key">export function</span> useProducts({ query, category }) {
+  <span class="key">return</span> useMemo(() => {
+    <span class="key">let</span> result = [...products]
+
+    <span class="key">if</span> (category !== <span class="str">'all'</span>)
+      result = result.<span class="key">filter</span>(p =>
+        p.category.<span class="key">includes</span>(category))
+
+    <span class="key">if</span> (query) {
+      <span class="key">const</span> q = query.toLowerCase()
+      result = result.<span class="key">filter</span>(p =>
+        [p.name, p.description,
+         p.subcategory,
+         ...p.features, ...p.preparation]
+        .<span class="key">some</span>(v => v.toLowerCase()
+                    .<span class="key">includes</span>(q)))
     }
-  }
+    <span class="key">return</span> { products: result,
+             total: products.length }
+  }, [query, category])
 }
         </div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-top:6px">src/hooks/useProducts.ts — zoeklogica</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.5;margin-top:5px">tailwind.config.ts &mdash; Peka-kleurtokens</div>
         <div class="code" style="font-size:12.5px;line-height:1.65;flex:1">
-<span class="cmt">// Zoekt in meerdere velden tegelijk</span>
-<span class="key">const</span> filtered = products.<span class="key">filter</span>(p => {
-  <span class="key">const</span> q = query.toLowerCase()
-  <span class="key">return</span> [
-    p.name,
-    p.description,
-    p.subcategory,
-    ...p.features,
-    ...p.preparation,
-  ].<span class="key">some</span>(veld =>
-    veld.toLowerCase().<span class="key">includes</span>(q)
-  )
-})
+<span class="cmt">// Kleurwaarden als design tokens zodat</span>
+<span class="cmt">// bg-peka-green, text-peka-accent etc. werken</span>
+peka: {
+  green:        <span class="str">'#006838'</span>,  <span class="cmt">// primair (header, buttons)</span>
+  <span class="str">'green-dark'</span>: <span class="str">'#004D28'</span>,  <span class="cmt">// hover / donkere varianten</span>
+  <span class="str">'green-50'</span>:   <span class="str">'#E8F5ED'</span>,  <span class="cmt">// pagina-achtergrond</span>
+  <span class="str">'green-100'</span>:  <span class="str">'#C8E6D0'</span>,  <span class="cmt">// kaart-randen</span>
+  accent:       <span class="str">'#E8502B'</span>,  <span class="cmt">// oranje CTA-knop</span>
+}
         </div>
       </div>
 
     </div>
-    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:58%"></div></div>
+    <div class="progress-bar mt-auto" style="margin-top:8px"><div class="progress-fill" style="width:55%"></div></div>
   </div>
 
-  <!-- ── CODE B: COMPONENT CODE ── -->
+  <!-- ── CODE B: iOS FIXES ── -->
   <div class="slide theme-white" id="scB">
-    <div class="label">Code generatie · 2 van 2</div>
-    <h2>Componenten &amp; iOS fixes</h2>
-    <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
+    <div class="label">Code generatie &middot; 2 van 3</div>
+    <h2 style="margin-bottom:10px">iOS-bugfixes in code</h2>
+    <div class="row gap-4" style="flex:1;align-items:stretch;min-height:0">
 
-      <!-- Kolom 1: safe-area -->
-      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">index.css + Header.tsx — iOS statusbalk fix</div>
-        <div class="code" style="font-size:12.5px;flex:1;line-height:1.65">
-<span class="cmt">/* Probleem: iOS statusbalk overlapte de header
-   omdat de app het hele scherm vult (notch).
-
-   Oplossing: CSS utility die automatisch de
-   juiste padding berekent voor elk iPhone-model */</span>
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-height:0">
+        <div style="font-size:10px;font-weight:700;color:#006838;letter-spacing:.08em;text-transform:uppercase">index.css + Header.tsx &mdash; statusbalk overlapte header</div>
+        <div class="code" style="font-size:12.5px;flex:1;overflow:hidden;line-height:1.65">
+<span class="cmt">/* PROBLEEM: de iPhone-statusbalk (tijd, accu)</span>
+<span class="cmt">   viel over de groene Peka-header heen.</span>
+<span class="cmt">   OORZAAK: viewport-fit=cover laat de app</span>
+<span class="cmt">   het volledige scherm vullen incl. notch.</span>
+<span class="cmt">   OPLOSSING: CSS leest de notch-hoogte uit</span>
+<span class="cmt">   het OS en gebruikt die als padding: */</span>
 
 <span class="cmt">/* index.css */</span>
 .<span class="key">pt-safe</span> {
   padding-top: <span class="key">max</span>(
-    <span class="str">0.75rem</span>,               <span class="cmt">/* minimaal 12px */</span>
-    <span class="key">env</span>(safe-area-inset-top) <span class="cmt">/* iPhone notch */</span>
+    <span class="str">0.75rem</span>,               <span class="cmt">/* minimaal 12px  */</span>
+    <span class="key">env</span>(safe-area-inset-top) <span class="cmt">/* notch-hoogte  */</span>
   );
 }
 
-<span class="cmt">/* Header.tsx — pt-safe zorgt voor juiste ruimte */</span>
+<span class="cmt">/* Header.tsx &mdash; binnenste div krijgt pt-safe */</span>
 &lt;<span class="key">header</span> className=<span class="str">"bg-peka-green sticky top-0 z-50"</span>&gt;
   &lt;<span class="key">div</span> className=<span class="str">"pt-safe"</span>&gt;
-    &lt;<span class="key">div</span> className=<span class="str">"max-w-2xl mx-auto px-4 py-3
-                    flex items-center gap-3"</span>&gt;
+    &lt;<span class="key">div</span> className=<span class="str">"max-w-2xl mx-auto px-4 py-3</span>
+<span class="str">                    flex items-center gap-3"</span>&gt;
       &lt;<span class="key">img</span> src=<span class="str">"/icon.svg"</span> className=<span class="str">"w-9 h-9"</span> /&gt;
       &lt;<span class="key">h1</span>&gt;Peka Kroef&lt;/<span class="key">h1</span>&gt;
     &lt;/&gt;
@@ -833,48 +842,150 @@
         </div>
       </div>
 
-      <!-- Kolom 2: ErrorBoundary + localStorage -->
-      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">ErrorBoundary.tsx — witte pagina voorkomen</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-height:0">
+        <div style="font-size:10px;font-weight:700;color:#006838;letter-spacing:.08em;text-transform:uppercase">ErrorBoundary.tsx + InstallBanner.tsx &mdash; witte pagina</div>
         <div class="code" style="font-size:12.5px;line-height:1.65">
-<span class="cmt">/* iOS Private Browsing blokkeert localStorage.
-   Zonder deze class → hele app crasht → witte pagina.
-   Met ErrorBoundary → vriendelijke foutmelding. */</span>
+<span class="cmt">/* PROBLEEM: iOS Safari (Priv&eacute;modus) gooit</span>
+<span class="cmt">   SecurityError bij localStorage-aanroep.</span>
+<span class="cmt">   Dit crashte de hele React-app &rarr; witte pagina.</span>
+<span class="cmt">   OPLOSSING 1: ErrorBoundary vangt crashes op</span>
+<span class="cmt">   en toont een "Herladen"-knop i.p.v. leeg scherm */</span>
 
 <span class="key">class</span> ErrorBoundary <span class="key">extends</span> Component {
   state = { error: <span class="key">null</span> }
 
   <span class="key">static</span> getDerivedStateFromError(e: Error) {
-    <span class="key">return</span> { error: e }  <span class="cmt">// fout opvangen</span>
+    <span class="key">return</span> { error: e }
   }
   render() {
-    <span class="key">if</span> (<span class="key">this</span>.state.error)
-      <span class="key">return</span> &lt;<span class="key">ReloadButton</span> /&gt;  <span class="cmt">// toon knop</span>
-    <span class="key">return this</span>.props.children   <span class="cmt">// normaal</span>
+    <span class="key">return</span> <span class="key">this</span>.state.error
+      ? &lt;<span class="key">ReloadScreen</span> /&gt;   <span class="cmt">// vriendelijke melding</span>
+      : <span class="key">this</span>.props.children  <span class="cmt">// normaal renderen</span>
   }
 }
         </div>
-        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase;margin-top:10px">InstallBanner.tsx — veilige localStorage toegang</div>
-        <div class="code" style="font-size:12.5px;line-height:1.65;flex:1">
-<span class="cmt">// try/catch rondom localStorage zodat
-// een SecurityError de app niet meer neergooit</span>
+        <div class="code" style="font-size:12.5px;line-height:1.65;flex:1;margin-top:6px">
+<span class="cmt">/* OPLOSSING 2: nooit direct localStorage</span>
+<span class="cmt">   aanroepen &mdash; altijd via veilige wrapper.</span>
+<span class="cmt">   Gooit nooit een exception, geeft null terug: */</span>
+
 <span class="key">function</span> safeStorage(
-  key: <span class="str">string</span>,
-  value?: <span class="str">string</span>
+  key: <span class="str">string</span>, value?: <span class="str">string</span>
 ): <span class="str">string | null</span> {
   <span class="key">try</span> {
     <span class="key">if</span> (value !== <span class="key">undefined</span>)
       localStorage.<span class="key">setItem</span>(key, value)
     <span class="key">return</span> localStorage.<span class="key">getItem</span>(key)
   } <span class="key">catch</span> {
-    <span class="key">return null</span>  <span class="cmt">// stil falen, geen crash</span>
+    <span class="key">return null</span>  <span class="cmt">// iOS Priv&eacute;modus: stil falen</span>
   }
 }
         </div>
       </div>
 
     </div>
-    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:63%"></div></div>
+    <div class="progress-bar mt-auto" style="margin-top:8px"><div class="progress-fill" style="width:60%"></div></div>
+  </div>
+
+  <!-- ── CODE C: GITHUB FILE BROWSER ── -->
+  <div class="slide theme-light" id="scC">
+    <div class="label">Code generatie &middot; 3 van 3</div>
+    <h2 style="margin-bottom:10px">Alle bestanden op GitHub</h2>
+    <div class="row gap-4" style="flex:1;align-items:stretch;min-height:0">
+
+      <!-- GitHub repo mockup -->
+      <div style="flex:1.3;display:flex;flex-direction:column;gap:0;min-height:0">
+        <div style="background:#24292f;border-radius:10px 10px 0 0;padding:9px 14px;display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <div style="display:flex;gap:5px">
+            <div style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#febc2e"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#28c840"></div>
+          </div>
+          <div style="background:#1c2128;border-radius:5px;padding:4px 10px;font-size:11px;font-family:monospace;color:#8b949e;flex:1;text-align:center">
+            github.com / tvandongen / <span style="color:#58a6ff">PekaProduct</span>
+          </div>
+        </div>
+        <div style="background:#0d1117;padding:9px 14px;border-left:1px solid #30363d;border-right:1px solid #30363d;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:13px;font-weight:700;color:#58a6ff">tvandongen / PekaProduct</span>
+            <span style="margin-left:auto;background:#21262d;border:1px solid #30363d;border-radius:5px;padding:2px 8px;font-size:10px;color:#c9d1d9">🌿 claude/amazing-brahmagupta</span>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:6px;font-size:10px;color:#8b949e">
+            <span>📝 <strong style="color:#c9d1d9">7</strong> commits</span>
+            <span>🌿 <strong style="color:#c9d1d9">2</strong> branches</span>
+            <span>⚡ React &middot; TypeScript &middot; Tailwind CSS &middot; PWA</span>
+          </div>
+        </div>
+        <div style="background:#0d1117;border:1px solid #30363d;border-top:none;border-radius:0 0 10px 10px;flex:1;overflow:hidden;font-family:monospace">
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:5px 12px;border-bottom:1px solid #21262d;color:#8b949e;font-size:10px">
+            <span></span><span>Bestand</span><span style="text-align:right">Regels</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:4px 12px;border-bottom:1px solid #161b22;color:#c9d1d9;background:#161b22;font-size:11px">
+            <span>📁</span><span style="color:#58a6ff">src/components/</span><span></span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:3px 12px 3px 28px;border-bottom:1px solid #161b22;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span>Header.tsx &nbsp;&middot;&nbsp; SearchBar.tsx &nbsp;&middot;&nbsp; CategoryFilter.tsx</span><span style="text-align:right;color:#8b949e">83</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:3px 12px 3px 28px;border-bottom:1px solid #161b22;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span>ProductCard.tsx</span><span style="text-align:right;color:#8b949e">65</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:3px 12px 3px 28px;border-bottom:1px solid #161b22;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span>InstallBanner.tsx &nbsp;&middot;&nbsp; ErrorBoundary.tsx</span><span style="text-align:right;color:#8b949e">104</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:4px 12px;border-bottom:1px solid #161b22;color:#c9d1d9;background:#161b22;font-size:11px">
+            <span>📁</span><span style="color:#58a6ff">src/data/ &nbsp;&middot;&nbsp; src/hooks/ &nbsp;&middot;&nbsp; src/pages/</span><span></span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:3px 12px 3px 28px;border-bottom:1px solid #161b22;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span style="color:#f0c674">products.ts</span><span style="text-align:right;color:#f0c674;font-weight:700">409</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:3px 12px 3px 28px;border-bottom:1px solid #161b22;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span>useProducts.ts &nbsp;&middot;&nbsp; App.tsx &nbsp;&middot;&nbsp; main.tsx</span><span style="text-align:right;color:#8b949e">57</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:3px 12px 3px 28px;border-bottom:1px solid #161b22;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span>Home.tsx &nbsp;&middot;&nbsp; ProductDetail.tsx</span><span style="text-align:right;color:#8b949e">219</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:4px 12px;border-bottom:1px solid #161b22;color:#c9d1d9;background:#161b22;font-size:11px">
+            <span>📁</span><span style="color:#58a6ff">public/</span><span></span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:3px 12px 3px 28px;border-bottom:1px solid #161b22;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span>sw.js &nbsp;&middot;&nbsp; manifest.json &nbsp;&middot;&nbsp; icon.svg</span><span style="text-align:right;color:#8b949e">79</span>
+          </div>
+          <div style="display:grid;grid-template-columns:20px 1fr 60px;padding:4px 12px;color:#c9d1d9;font-size:11px">
+            <span>📄</span><span>vercel.json &nbsp;&middot;&nbsp; tailwind.config.ts &nbsp;&middot;&nbsp; vite.config.ts &nbsp;&middot;&nbsp; index.css</span><span style="text-align:right;color:#8b949e">95</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats kolom -->
+      <div style="flex:0 0 190px;display:flex;flex-direction:column;gap:10px">
+        <div style="background:var(--green);color:#fff;border-radius:12px;padding:18px;text-align:center;flex-shrink:0">
+          <div style="font-size:46px;font-weight:800;line-height:1">1 055</div>
+          <div style="font-size:11px;opacity:.75;margin-top:5px;font-weight:600;letter-spacing:.05em">regels gegenereerde code</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--green-mid);border-radius:12px;padding:13px;flex-shrink:0">
+          <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Per type</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#374151">
+            <div style="display:flex;justify-content:space-between"><span>📄 TSX componenten</span><span style="font-weight:700">471</span></div>
+            <div style="display:flex;justify-content:space-between"><span>📦 Data &amp; logica</span><span style="font-weight:700">435</span></div>
+            <div style="display:flex;justify-content:space-between"><span>🎨 CSS &amp; config</span><span style="font-weight:700">149</span></div>
+          </div>
+          <div style="border-top:1px solid var(--green-mid);margin-top:8px;padding-top:8px;display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--green)">
+            <span>Totaal</span><span>1 055</span>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--green-mid);border-radius:12px;padding:13px;flex:1">
+          <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Project totaal</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#374151">
+            <div style="display:flex;justify-content:space-between"><span>📁 Bestanden</span><span style="font-weight:700">16</span></div>
+            <div style="display:flex;justify-content:space-between"><span>📦 Git commits</span><span style="font-weight:700">7</span></div>
+            <div style="display:flex;justify-content:space-between"><span>🥔 Producten</span><span style="font-weight:700">30</span></div>
+            <div style="display:flex;justify-content:space-between"><span>⏱ Bouwtijd</span><span style="font-weight:700">&plusmn;40 min</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="progress-bar mt-auto" style="margin-top:8px"><div class="progress-fill" style="width:63%"></div></div>
   </div>
 
   <!-- ── GITHUB 1: WAT IS GITHUB ── -->
@@ -1548,7 +1659,7 @@
 <div class="nav">
   <button id="prev" onclick="go(-1)" disabled>‹</button>
   <div class="dots" id="dots"></div>
-  <span class="nav-counter" id="counter">1 / 19</span>
+  <span class="nav-counter" id="counter">1 / 20</span>
   <button id="next" onclick="go(1)">›</button>
 </div>
 
