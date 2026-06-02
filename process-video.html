@@ -703,6 +703,227 @@
     <div class="progress-bar mt-auto"><div class="progress-fill" style="width:70%"></div></div>
   </div>
 
+  <!-- ── CODE A: GEGENEREERDE CODE ── -->
+  <div class="slide theme-dark" id="scA">
+    <div class="label">Code generatie · 1 van 2</div>
+    <h2>Van opdracht naar code</h2>
+    <div class="row mt-4 gap-3" style="flex:1;align-items:stretch">
+
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-bottom:2px">src/data/products.ts</div>
+        <div class="code" style="font-size:11px;flex:1">
+<span class="cmt">// Interface — gegenereerd op basis van website-analyse</span>
+<span class="key">export interface</span> Product {
+  id:          <span class="str">string</span>
+  name:        <span class="str">string</span>
+  category:    <span class="str">string[]</span>
+  subcategory: <span class="str">string</span>
+  preparation: <span class="str">string[]</span>
+  shelfLife:   <span class="str">string</span>
+  packaging:   <span class="str">string[]</span>
+  features:    <span class="str">string[]</span>
+}
+
+<span class="cmt">// 30 echte producten — bijv. Pommes Parisienne:</span>
+{
+  id: <span class="str">'pommes-parisienne'</span>,
+  name: <span class="str">'Pommes Parisienne'</span>,
+  category: [<span class="str">'foodservice'</span>],
+  subcategory: <span class="str">'Bijgerechten'</span>,
+  preparation: [
+    <span class="str">'Stomen (100°C, 10 min)'</span>,
+    <span class="str">'Magnetron (1 min/100g)'</span>,
+  ],
+  shelfLife: <span class="str">'18 dagen gekoeld'</span>,
+  features: [<span class="str">'Glutenvrij'</span>, <span class="str">'Lactosevrij'</span>, ...],
+}
+        </div>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-bottom:2px">tailwind.config.ts + index.css</div>
+        <div class="code" style="font-size:11px">
+<span class="cmt">// Peka-kleuren als Tailwind tokens</span>
+colors: {
+  peka: {
+    green:       <span class="str">'#006838'</span>,
+    <span class="str">'green-dark'</span>: <span class="str">'#004D28'</span>,
+    <span class="str">'green-50'</span>:   <span class="str">'#E8F5ED'</span>,
+    accent:      <span class="str">'#E8502B'</span>,
+  }
+}
+        </div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin:6px 0 2px">src/hooks/useProducts.ts</div>
+        <div class="code" style="font-size:11px">
+<span class="cmt">// Zoeklogica — multi-veld, case-insensitive</span>
+<span class="key">const</span> filtered = products.<span class="key">filter</span>(p => {
+  <span class="key">const</span> q = query.toLowerCase()
+  <span class="key">return</span> [
+    p.name, p.description,
+    p.subcategory,
+    ...p.features,
+    ...p.preparation,
+  ].<span class="key">some</span>(f => f.toLowerCase()
+        .<span class="key">includes</span>(q))
+})
+        </div>
+      </div>
+
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:58%"></div></div>
+  </div>
+
+  <!-- ── CODE B: COMPONENT CODE ── -->
+  <div class="slide theme-white" id="scB">
+    <div class="label">Code generatie · 2 van 2</div>
+    <h2>Componenten &amp; iOS fixes</h2>
+    <div class="row mt-4 gap-3" style="align-items:stretch">
+
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">Header.tsx — safe-area fix</div>
+        <div class="code" style="font-size:11.5px;flex:1">
+<span class="cmt">/* iOS statusbalk overlapte de header.
+   Opgelost met env(safe-area-inset-top) */</span>
+
+<span class="cmt">/* index.css */</span>
+.<span class="key">pt-safe</span> {
+  padding-top: <span class="key">max</span>(
+    <span class="str">0.75rem</span>,
+    <span class="key">env</span>(safe-area-inset-top)
+  );
+}
+
+<span class="cmt">// Header.tsx</span>
+&lt;<span class="key">header</span> className=<span class="str">"bg-peka-green sticky top-0"</span>&gt;
+  &lt;<span class="key">div</span> className=<span class="str">"pt-safe"</span>&gt;
+    &lt;<span class="key">div</span> className=<span class="str">"px-4 py-3 flex gap-3"</span>&gt;
+      &lt;<span class="key">img</span> src=<span class="str">"/icon.svg"</span> /&gt;
+      &lt;<span class="key">h1</span>&gt;Peka Kroef&lt;/<span class="key">h1</span>&gt;
+    &lt;/&gt;
+  &lt;/&gt;
+&lt;/&gt;
+        </div>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase">ErrorBoundary.tsx — witte pagina fix</div>
+        <div class="code" style="font-size:11.5px">
+<span class="cmt">/* iOS Private Browsing gooit SecurityError
+   op localStorage → hele app crashte.
+   ErrorBoundary vangt dit op: */</span>
+
+<span class="key">class</span> ErrorBoundary <span class="key">extends</span> Component {
+  <span class="key">static</span> getDerivedStateFromError(e) {
+    <span class="key">return</span> { error: e }
+  }
+  render() {
+    <span class="key">if</span> (<span class="key">this</span>.state.error)
+      <span class="key">return</span> &lt;<span class="key">ReloadScreen</span> /&gt;
+    <span class="key">return this</span>.props.children
+  }
+}
+        </div>
+        <div style="font-size:11px;font-weight:700;color:#006838;letter-spacing:.06em;text-transform:uppercase;margin-top:8px">InstallBanner.tsx — localStorage veilig</div>
+        <div class="code" style="font-size:11.5px">
+<span class="cmt">// Veilige wrapper — gooit nooit een exception</span>
+<span class="key">function</span> safeStorage(key, val?) {
+  <span class="key">try</span> {
+    <span class="key">return</span> val
+      ? localStorage.setItem(key, val)
+      : localStorage.getItem(key)
+  } <span class="key">catch</span> { <span class="key">return null</span> }
+}
+        </div>
+      </div>
+
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:63%"></div></div>
+  </div>
+
+  <!-- ── GITHUB ── -->
+  <div class="slide theme-green" id="scG">
+    <div class="label">GitHub integratie</div>
+    <h2>Automatisch naar<br>GitHub gepusht</h2>
+    <div class="row mt-5 gap-4" style="flex:1;align-items:stretch">
+
+      <!-- Commit history -->
+      <div style="flex:1.2;display:flex;flex-direction:column;gap:0">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-bottom:8px">git log — commit history</div>
+        <div class="code" style="font-size:10.5px;flex:1;line-height:2">
+<span style="color:#79d4f0">c5f0b92</span> <span class="str">Add 3 iPhone mockup slides</span>
+<span style="color:#79d4f0">64e61fe</span> <span class="str">Add timing slide to presentation</span>
+<span style="color:#79d4f0">e8c179b</span> <span class="str">Fix white page on iOS Safari</span>
+  <span class="cmt">↳ localStorage try/catch</span>
+  <span class="cmt">↳ Service worker cache → peka-v3</span>
+  <span class="cmt">↳ ErrorBoundary toegevoegd</span>
+<span style="color:#79d4f0">cd6940f</span> <span class="str">Expand product catalog + branding</span>
+  <span class="cmt">↳ 30 Peka Kroef producten</span>
+  <span class="cmt">↳ Hero banner, ProductCard</span>
+<span style="color:#79d4f0">f44415b</span> <span class="str">Add Vercel deployment config</span>
+  <span class="cmt">↳ vercel.json, rewrites, headers</span>
+<span style="color:#79d4f0">e3a9c12</span> <span class="str">Initial project — productPeka</span>
+  <span class="cmt">↳ React + Vite + Tailwind + PWA</span>
+        </div>
+      </div>
+
+      <!-- Workflow -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-bottom:0px">workflow</div>
+        <div class="card" style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:22px">💬</div>
+          <div>
+            <div style="font-size:13px;font-weight:700">Opdracht in chat</div>
+            <div style="font-size:11px;opacity:.7;margin-top:2px">Gebruiker beschrijft wat er nodig is</div>
+          </div>
+        </div>
+        <div style="text-align:center;opacity:.4;font-size:18px">↓</div>
+        <div class="card" style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:22px">🤖</div>
+          <div>
+            <div style="font-size:13px;font-weight:700">AI schrijft &amp; bewerkt code</div>
+            <div style="font-size:11px;opacity:.7;margin-top:2px">Bestanden aanmaken, aanpassen, debuggen</div>
+          </div>
+        </div>
+        <div style="text-align:center;opacity:.4;font-size:18px">↓</div>
+        <div class="card" style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:22px">📦</div>
+          <div>
+            <div style="font-size:13px;font-weight:700">git commit &amp; push</div>
+            <div style="font-size:11px;opacity:.7;margin-top:2px">Elke stap direct naar GitHub branch</div>
+          </div>
+        </div>
+        <div style="text-align:center;opacity:.4;font-size:18px">↓</div>
+        <div class="card" style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:22px">🚀</div>
+          <div>
+            <div style="font-size:13px;font-weight:700">Vercel deploy</div>
+            <div style="font-size:11px;opacity:.7;margin-top:2px">Automatisch live bij elke push naar main</div>
+          </div>
+        </div>
+        <div style="margin-top:4px;background:rgba(255,255,255,.12);border-radius:10px;padding:9px 12px;font-size:11px;font-family:monospace;letter-spacing:.02em">
+          github.com/tvandongen/PekaProduct<br>
+          <span style="opacity:.6">branch: claude/amazing-brahmagupta-heVfW</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:24px;font-weight:800;line-height:1">1 055</div>
+            <div style="font-size:10px;opacity:.7;margin-top:3px">regels code</div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:24px;font-weight:800;line-height:1">16</div>
+            <div style="font-size:10px;opacity:.7;margin-top:3px">bestanden</div>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,.15);border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:24px;font-weight:800;line-height:1">6</div>
+            <div style="font-size:10px;opacity:.7;margin-top:3px">commits</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:68%"></div></div>
+  </div>
+
   <!-- ── MOCKUP A: HOME SCHERM ── -->
   <div class="slide theme-light" id="smA">
     <div class="label">Voorbeeld · Scherm 1 van 3</div>
@@ -1140,19 +1361,19 @@
     <div class="result-stats">
       <div class="stat-box">
         <div class="stat-num">30</div>
-        <div class="stat-label">Echte producten</div>
+        <div class="stat-label">Producten</div>
       </div>
       <div class="stat-box">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Categorieën</div>
+        <div class="stat-num" style="font-size:28px">1 055</div>
+        <div class="stat-label">Regels code</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Git commits</div>
       </div>
       <div class="stat-box">
         <div class="stat-num">📱</div>
-        <div class="stat-label">Installeerbaar</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">✅</div>
-        <div class="stat-label">Offline werkt</div>
+        <div class="stat-label">iPhone-app</div>
       </div>
     </div>
     <div class="row mt-6 gap-3">
@@ -1170,7 +1391,7 @@
 <div class="nav">
   <button id="prev" onclick="go(-1)" disabled>‹</button>
   <div class="dots" id="dots"></div>
-  <span class="nav-counter" id="counter">1 / 14</span>
+  <span class="nav-counter" id="counter">1 / 17</span>
   <button id="next" onclick="go(1)">›</button>
 </div>
 
