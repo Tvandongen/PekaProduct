@@ -291,6 +291,145 @@
   .comp-file { font-family: monospace; font-size: 13px; color: #a8e6b8; flex: 1; }
   .comp-desc { font-size: 12px; opacity: .7; }
 
+  /* PHONE MOCKUP */
+  .phone-wrap {
+    display: flex; gap: 28px; align-items: center; justify-content: center;
+    margin-top: 18px; flex: 1;
+  }
+  .phone {
+    width: 195px; height: 390px;
+    background: #111;
+    border-radius: 38px;
+    border: 6px solid #222;
+    box-shadow: 0 0 0 1px #444, 0 24px 48px rgba(0,0,0,.5);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone-notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 22px;
+    background: #111; border-radius: 0 0 14px 14px; z-index: 10;
+  }
+  .phone-screen {
+    width: 100%; height: 100%;
+    background: #E8F5ED;
+    overflow: hidden;
+    font-family: -apple-system, sans-serif;
+  }
+  .ph-header {
+    background: #006838; color: #fff;
+    padding: 28px 10px 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ph-logo {
+    width: 22px; height: 22px; background: rgba(255,255,255,.2);
+    border-radius: 5px; display:flex; align-items:center; justify-content:center;
+    font-size: 11px; flex-shrink:0;
+  }
+  .ph-title  { font-size: 11px; font-weight: 800; line-height:1.1; }
+  .ph-sub    { font-size: 7px;  opacity: .7; }
+  .ph-hero {
+    background: #006838; color: #fff;
+    padding: 8px 10px 10px;
+  }
+  .ph-hero-eyebrow { font-size: 6px; opacity:.6; letter-spacing:.08em; text-transform:uppercase; }
+  .ph-hero-title   { font-size: 11px; font-weight: 800; line-height:1.2; margin-top:2px; }
+  .ph-hero-stats   { display:flex; gap:4px; margin-top:6px; }
+  .ph-stat {
+    flex:1; background:rgba(255,255,255,.12);
+    border-radius:6px; padding:4px; text-align:center;
+  }
+  .ph-stat-n { font-size: 9px; font-weight: 800; }
+  .ph-stat-l { font-size: 5px; opacity:.7; }
+  .ph-search {
+    background: #fff; margin: 6px 8px 0;
+    border-radius: 8px; padding: 5px 8px;
+    display:flex; align-items:center; gap:4px;
+    border: 1px solid #C8E6D0; font-size: 7px; color: #9ca3af;
+  }
+  .ph-filters {
+    display:flex; gap:4px; padding: 5px 8px;
+    overflow: hidden;
+  }
+  .ph-filter {
+    padding: 3px 7px; border-radius: 999px; font-size: 6px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ph-filter.active { background: #006838; color: #fff; }
+  .ph-filter.idle   { background: #fff; color: #374151; border: 1px solid #d1d5db; }
+  .ph-card {
+    background: #fff; margin: 0 8px 5px;
+    border-radius: 8px; padding: 7px 8px;
+    border: 1px solid #e5e7eb;
+    display: flex; align-items: flex-start; gap: 6px;
+  }
+  .ph-card-icon {
+    width: 26px; height: 26px; background: #E8F5ED;
+    border-radius: 7px; display:flex; align-items:center; justify-content:center;
+    font-size: 13px; flex-shrink:0;
+  }
+  .ph-card-body { flex:1; min-width:0; }
+  .ph-card-badges { display:flex; gap:3px; margin-bottom:2px; }
+  .ph-badge {
+    font-size: 5px; font-weight:700; padding: 1px 4px; border-radius:999px;
+  }
+  .ph-badge-r { background:#f3e8ff; color:#7c3aed; }
+  .ph-badge-f { background:#dbeafe; color:#1d4ed8; }
+  .ph-badge-c { background:#E8F5ED; color:#006838; }
+  .ph-card-name { font-size: 8px; font-weight: 700; color: #111; }
+  .ph-card-desc { font-size: 6px; color: #6b7280; margin-top:1px; line-height:1.4; }
+  .ph-card-meta { font-size: 5.5px; color: #9ca3af; margin-top:3px; }
+  .ph-card-arr  { font-size: 9px; color: #d1d5db; margin-top:4px; }
+
+  /* detail screen */
+  .ph-detail-hero {
+    background: #006838; color: #fff;
+    padding: 28px 10px 12px;
+  }
+  .ph-back { font-size: 8px; opacity:.8; margin-bottom:4px; }
+  .ph-det-badges { display:flex; gap:3px; margin-bottom:6px; }
+  .ph-det-badge {
+    font-size: 6px; padding: 2px 6px; border-radius:999px; font-weight:700;
+    background: rgba(255,255,255,.2); color:#fff;
+  }
+  .ph-det-name { font-size: 14px; font-weight: 800; }
+  .ph-det-sub  { font-size: 7px; opacity:.65; margin-top:2px; }
+  .ph-section {
+    background:#fff; margin: 5px 8px;
+    border-radius: 8px; padding: 7px 9px;
+  }
+  .ph-section-label {
+    font-size: 6px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color: #006838; margin-bottom:4px;
+  }
+  .ph-section-text { font-size: 7px; color: #4b5563; line-height: 1.5; }
+  .ph-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin: 5px 8px; }
+  .ph-grid-card { background:#fff; border-radius:8px; padding: 6px 8px; }
+  .ph-pills { display:flex; flex-wrap:wrap; gap:3px; }
+  .ph-pill {
+    font-size:6px; background:#E8F5ED; color:#006838;
+    border:1px solid #C8E6D0; border-radius:5px; padding: 2px 5px;
+  }
+  .ph-features { display:flex; flex-direction:column; gap:3px; }
+  .ph-feat { display:flex; align-items:center; gap:4px; font-size:6.5px; color:#4b5563; }
+  .ph-feat-dot {
+    width:8px; height:8px; border-radius:50%;
+    background:#E8F5ED; border:1.5px solid #006838;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .ph-feat-inner { width:3px; height:3px; background:#006838; border-radius:50%; }
+
+  /* search screen */
+  .ph-search-active {
+    background: #fff; margin: 6px 8px 0;
+    border-radius: 8px; padding: 5px 8px;
+    display:flex; align-items:center; gap:4px;
+    border: 2px solid #006838; font-size: 7px; color: #111;
+    font-weight: 600;
+  }
+  .ph-result-label { font-size: 6px; color:#6b7280; padding: 4px 8px 2px; }
+
   /* S7: PWA */
   .pwa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
   .pwa-card {
@@ -564,6 +703,294 @@
     <div class="progress-bar mt-auto"><div class="progress-fill" style="width:70%"></div></div>
   </div>
 
+  <!-- ── MOCKUP A: HOME SCHERM ── -->
+  <div class="slide theme-light" id="smA">
+    <div class="label">Voorbeeld · Scherm 1 van 3</div>
+    <h2>Homescherm &amp; productlijst</h2>
+    <div class="phone-wrap">
+
+      <!-- Phone 1: full home -->
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ph-header">
+            <div class="ph-logo">🥔</div>
+            <div>
+              <div class="ph-title">Peka Kroef</div>
+              <div class="ph-sub">Verse aardappelproducten</div>
+            </div>
+          </div>
+          <div class="ph-hero">
+            <div class="ph-hero-eyebrow">Since 1970</div>
+            <div class="ph-hero-title">Verse gekoelde<br>aardappelproducten</div>
+            <div class="ph-hero-stats">
+              <div class="ph-stat"><div class="ph-stat-n">30</div><div class="ph-stat-l">producten</div></div>
+              <div class="ph-stat"><div class="ph-stat-n">50+</div><div class="ph-stat-l">jaar</div></div>
+              <div class="ph-stat"><div class="ph-stat-n">100%</div><div class="ph-stat-l">vers</div></div>
+            </div>
+          </div>
+          <div class="ph-search">🔍&nbsp; Zoek producten...</div>
+          <div class="ph-filters">
+            <div class="ph-filter active">Alle</div>
+            <div class="ph-filter idle">Retail</div>
+            <div class="ph-filter idle">Foodservice</div>
+            <div class="ph-filter idle">Consumenten</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-icon">🥔</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-r">Retail</span></div>
+              <div class="ph-card-name">Bistro Minikriel</div>
+              <div class="ph-card-desc">Kleine gekruide krieltjes voor een feestelijk bijgerecht</div>
+              <div class="ph-card-meta">⏱ 5 weken gesloten · 450 g</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-icon">🍟</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-r">Retail</span></div>
+              <div class="ph-card-name">Verse Frites 700g</div>
+              <div class="ph-card-desc">Dunne verse frietjes, vers en licht voorgebakken</div>
+              <div class="ph-card-meta">⏱ 5 weken gesloten · 700 g</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-icon">✨</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-f">Foodservice</span></div>
+              <div class="ph-card-name">Pommes Parisienne</div>
+              <div class="ph-card-desc">Kleine ronde balletjes, ideaal voor stomen</div>
+              <div class="ph-card-meta">⏱ 18 dagen gekoeld · 2 kg</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uitleg -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card light" style="border-color:#C8E6D0">
+          <div style="font-size:18px;margin-bottom:6px">🏠</div>
+          <h3 style="color:#006838;font-size:15px">Hero banner</h3>
+          <p style="font-size:13px">Statistieken: 30 producten, 50+ jaar ervaring, 100% vers gekoeld</p>
+        </div>
+        <div class="card light" style="border-color:#C8E6D0">
+          <div style="font-size:18px;margin-bottom:6px">🔍</div>
+          <h3 style="color:#006838;font-size:15px">Zoekbalk + filters</h3>
+          <p style="font-size:13px">Zoek op naam, beschrijving of kenmerken. Filter per categorie.</p>
+        </div>
+        <div class="card light" style="border-color:#C8E6D0">
+          <div style="font-size:18px;margin-bottom:6px">🃏</div>
+          <h3 style="color:#006838;font-size:15px">Productkaarten</h3>
+          <p style="font-size:13px">Emoji-icoon per type, kleurcode per categorie, houdbaarheid direct zichtbaar</p>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:65%"></div></div>
+  </div>
+
+  <!-- ── MOCKUP B: ZOEKEN & FILTEREN ── -->
+  <div class="slide theme-dark" id="smB">
+    <div class="label">Voorbeeld · Scherm 2 van 3</div>
+    <h2>Zoeken &amp; filteren</h2>
+    <div class="phone-wrap">
+
+      <!-- Phone: zoekresultaat -->
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ph-header">
+            <div class="ph-logo">🥔</div>
+            <div>
+              <div class="ph-title">Peka Kroef</div>
+              <div class="ph-sub">Verse aardappelproducten</div>
+            </div>
+          </div>
+          <div class="ph-search-active">🔍&nbsp; gratin<span style="display:inline-block;margin-left:auto;color:#006838;font-size:8px">✕</span></div>
+          <div class="ph-filters">
+            <div class="ph-filter active">Alle</div>
+            <div class="ph-filter idle">Retail</div>
+            <div class="ph-filter idle">Foodservice</div>
+          </div>
+          <div class="ph-result-label">3 resultaten voor "gratin"</div>
+          <div class="ph-card">
+            <div class="ph-card-icon">🍽️</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-r">Retail</span><span class="ph-badge ph-badge-f">Foodservice</span></div>
+              <div class="ph-card-name">Aardappelgratin 450g</div>
+              <div class="ph-card-desc">Klassieke gratin met echte room — direct de oven in</div>
+              <div class="ph-card-meta">⏱ 5 weken gesloten · 450 g</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-icon">🍽️</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-f">Foodservice</span></div>
+              <div class="ph-card-name">Aardappelgratin Rolls</div>
+              <div class="ph-card-desc">Individuele rolls voor consistente portionering</div>
+              <div class="ph-card-meta">⏱ 18 dagen gekoeld · 700 g</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-icon">🍽️</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-f">Foodservice</span></div>
+              <div class="ph-card-name">Truffel Aardappelgratin</div>
+              <div class="ph-card-desc">Premium gratin met truffelaroma — gastronomisch</div>
+              <div class="ph-card-meta">⏱ 18 dagen gekoeld · 2 kg</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone: gefilterd op Foodservice -->
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ph-header">
+            <div class="ph-logo">🥔</div>
+            <div>
+              <div class="ph-title">Peka Kroef</div>
+              <div class="ph-sub">Verse aardappelproducten</div>
+            </div>
+          </div>
+          <div class="ph-search">🔍&nbsp; Zoek producten...</div>
+          <div class="ph-filters">
+            <div class="ph-filter idle">Alle</div>
+            <div class="ph-filter idle">Retail</div>
+            <div class="ph-filter active">Foodservice</div>
+          </div>
+          <div class="ph-result-label">14 producten</div>
+          <div class="ph-card">
+            <div class="ph-card-icon">✨</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-f">Foodservice</span></div>
+              <div class="ph-card-name">Pommes Parisienne</div>
+              <div class="ph-card-desc">Kleine ronde balletjes, ideaal voor stomen</div>
+              <div class="ph-card-meta">⏱ 18 dgn · 2 kg</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-icon">✨</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-f">Foodservice</span></div>
+              <div class="ph-card-name">Rotisserie Aardappelen</div>
+              <div class="ph-card-desc">Gouden kleur na bakken, 97% pure aardappel</div>
+              <div class="ph-card-meta">⏱ 18 dgn · 2 kg</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-icon">✨</div>
+            <div class="ph-card-body">
+              <div class="ph-card-badges"><span class="ph-badge ph-badge-f">Foodservice</span></div>
+              <div class="ph-card-name">Jacket Potatoes</div>
+              <div class="ph-card-desc">Hele gepofte aardappelen, perfect voor BBQ</div>
+              <div class="ph-card-meta">⏱ 18 dgn · 2 kg</div>
+            </div>
+            <div class="ph-card-arr">›</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- label -->
+      <div style="flex:0 0 130px;display:flex;flex-direction:column;gap:10px">
+        <div class="card" style="font-size:12px;line-height:1.5">
+          <div style="font-size:20px;margin-bottom:4px">🔎</div>
+          <strong>Zoeken</strong><br>Zoekt door naam, beschrijving, kenmerken én bereidingswijze
+        </div>
+        <div class="card" style="font-size:12px;line-height:1.5">
+          <div style="font-size:20px;margin-bottom:4px">🗂️</div>
+          <strong>Filteren</strong><br>Één klik op een categorie filtert de volledige lijst
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:72%"></div></div>
+  </div>
+
+  <!-- ── MOCKUP C: PRODUCTDETAIL ── -->
+  <div class="slide theme-light" id="smC">
+    <div class="label">Voorbeeld · Scherm 3 van 3</div>
+    <h2>Productdetailpagina</h2>
+    <div class="phone-wrap">
+
+      <!-- Phone: detail -->
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" style="background:#E8F5ED">
+          <div class="ph-detail-hero">
+            <div class="ph-back">‹ Terug</div>
+            <div class="ph-det-badges">
+              <span class="ph-det-badge">Retail</span>
+              <span class="ph-det-badge">Foodservice</span>
+            </div>
+            <div class="ph-det-name">Aardappelgratin</div>
+            <div class="ph-det-sub">Gerechten</div>
+          </div>
+          <div class="ph-section">
+            <div class="ph-section-label">Omschrijving</div>
+            <div class="ph-section-text">Klassiek gerecht bereid met echte room en een kaaskorst. Bevat 60% aardappelen. Eenvoudig opwarmen in oven of magnetron.</div>
+          </div>
+          <div class="ph-grid">
+            <div class="ph-grid-card">
+              <div class="ph-section-label">Houdbaarheid</div>
+              <div style="font-size:7px;font-weight:700;color:#111">5 wkn gesloten</div>
+            </div>
+            <div class="ph-grid-card">
+              <div class="ph-section-label">Verpakking</div>
+              <div style="font-size:7px;color:#4b5563">450 g &nbsp;·&nbsp; 2 kg</div>
+            </div>
+          </div>
+          <div class="ph-section">
+            <div class="ph-section-label">Bereidingswijzen</div>
+            <div class="ph-pills">
+              <span class="ph-pill">Oven 180°C, 25 min</span>
+              <span class="ph-pill">Magnetron 5 min</span>
+            </div>
+          </div>
+          <div class="ph-section">
+            <div class="ph-section-label">Kenmerken</div>
+            <div class="ph-features">
+              <div class="ph-feat"><div class="ph-feat-dot"><div class="ph-feat-inner"></div></div>Echte room</div>
+              <div class="ph-feat"><div class="ph-feat-dot"><div class="ph-feat-inner"></div></div>60% aardappel</div>
+              <div class="ph-feat"><div class="ph-feat-dot"><div class="ph-feat-inner"></div></div>Direct ovenklaar</div>
+            </div>
+          </div>
+          <div style="margin:5px 8px;background:#E8F5ED;border:1px solid #C8E6D0;border-radius:8px;padding:7px;text-align:center">
+            <div style="font-size:6px;color:#6b7280;margin-bottom:4px">Meer info of bestellen?</div>
+            <div style="background:#E8502B;color:#fff;font-size:7px;font-weight:800;padding:4px 12px;border-radius:999px;display:inline-block">Bezoek pekakroef.com</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Uitleg -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card light" style="border-color:#C8E6D0">
+          <div style="font-size:18px;margin-bottom:6px">🟢</div>
+          <h3 style="color:#006838;font-size:15px">Hero in Peka-groen</h3>
+          <p style="font-size:13px">Categoriebadges, productnaam en subcategorie duidelijk bovenaan</p>
+        </div>
+        <div class="card light" style="border-color:#C8E6D0">
+          <div style="font-size:18px;margin-bottom:6px">📋</div>
+          <h3 style="color:#006838;font-size:15px">Alle productinfo</h3>
+          <p style="font-size:13px">Omschrijving, houdbaarheid, verpakkingsformaten, bereidingswijzen en kenmerken</p>
+        </div>
+        <div class="card light" style="border-color:#C8E6D0">
+          <div style="font-size:18px;margin-bottom:6px">🔴</div>
+          <h3 style="color:#006838;font-size:15px">Oranje CTA-knop</h3>
+          <p style="font-size:13px">Accent-kleur (#E8502B) linkt door naar pekakroef.com voor bestellen</p>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar mt-auto"><div class="progress-fill" style="width:79%"></div></div>
+  </div>
+
   <!-- ── S8: PWA ── -->
   <div class="slide theme-green" id="s7">
     <div class="label">Stap 7 · Progressive Web App</div>
@@ -743,7 +1170,7 @@
 <div class="nav">
   <button id="prev" onclick="go(-1)" disabled>‹</button>
   <div class="dots" id="dots"></div>
-  <span class="nav-counter" id="counter">1 / 11</span>
+  <span class="nav-counter" id="counter">1 / 14</span>
   <button id="next" onclick="go(1)">›</button>
 </div>
 
