@@ -75,6 +75,40 @@
   .theme-white  { background: var(--white); color: #1a1a1a; }
   .theme-dark   { background: var(--green-dark); color: var(--white); }
 
+
+  /* ── CLAUDE BADGE ── */
+  .claude-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .claude-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 999px;
+    padding: 3px 10px 3px 7px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.9);
+  }
+  .claude-tag.dark {
+    background: rgba(0,0,0,.08);
+    border-color: rgba(0,68,40,.25);
+    color: #006838;
+  }
+  .claude-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #a8e6b8;
+    flex-shrink: 0;
+  }
+  .claude-dot.dark { background: #006838; }
+
   /* ── TYPOGRAPHY ── */
   .label {
     font-size: clamp(10px, 1.1vw, 13px);
@@ -502,8 +536,11 @@
 
   <!-- ── S1: TITLE ── -->
   <div class="slide theme-green active" id="s0">
-    <div class="s1-logo">🥔</div>
-    <div class="label">Peka Kroef · 2025</div>
+    <div class="claude-bar" style="margin-bottom:0">
+      <div class="s1-logo" style="margin-bottom:0">🥔</div>
+      <div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div>
+    </div>
+    <div class="label" style="margin-top:14px">Peka Kroef &middot; 2025</div>
     <h1>Hoe is de<br>Peka App<br>gemaakt?</h1>
     <p class="sub">Van opdracht tot installeerbare<br>iPhone app — stap voor stap.</p>
     <div class="s1-tags">
@@ -518,7 +555,7 @@
 
   <!-- ── S2: OPDRACHT ── -->
   <div class="slide theme-dark" id="s1">
-    <div class="label">Stap 1 · De Opdracht</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 1 · De Opdracht</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Wat moest er<br>worden gemaakt?</h2>
     <div class="brief-block">
       "Maak een nieuw project met de naam productPeka. Dit moet een site opleveren in de huisstijl van Peka Kroef die ook direct als app op een iPhone kan worden geïnstalleerd. In de website wil ik producten van Peka makkelijk kunnen opzoeken."
@@ -545,7 +582,7 @@
 
   <!-- ── S3: RESEARCH ── -->
   <div class="slide theme-light" id="s2">
-    <div class="label">Stap 2 · Research</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 2 · Research</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Website analyseren</h2>
     <p class="mt-4">Via web search en site scraping zijn alle producten en de huisstijl van pekakroef.com opgehaald.</p>
     <div class="row mt-6 gap-3">
@@ -568,7 +605,7 @@
 
   <!-- ── S4: TECH STACK ── -->
   <div class="slide theme-white" id="s3">
-    <div class="label">Stap 3 · Tech Stack</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 3 · Tech Stack</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Welke technologie?</h2>
     <div class="tech-grid">
       <div class="tech-item">
@@ -605,7 +642,7 @@
 
   <!-- ── S5: HUISSTIJL ── -->
   <div class="slide theme-green" id="s4">
-    <div class="label">Stap 4 · Huisstijl</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 4 · Huisstijl</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Kleuren & Design</h2>
     <p class="sub">Gebaseerd op de visuele identiteit van pekakroef.com</p>
     <div class="color-row">
@@ -645,7 +682,7 @@
 
   <!-- ── S6: PRODUCTEN DATA ── -->
   <div class="slide theme-light" id="s5">
-    <div class="label">Stap 5 · Product Data</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 5 · Product Data</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>30 echte producten</h2>
     <div class="product-list">
       <div class="product-row">
@@ -687,7 +724,7 @@
 
   <!-- ── S7: COMPONENTEN ── -->
   <div class="slide theme-dark" id="s6">
-    <div class="label">Stap 6 · Componenten</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 6 · Componenten</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>De app bouwen</h2>
     <div class="comp-list">
       <div class="comp-row">
@@ -716,7 +753,7 @@
 
   <!-- ── CODE A: PRODUCTDATA & ZOEK ── -->
   <div class="slide theme-dark" id="scA">
-    <div class="label">Code generatie &middot; 1 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Code generatie &middot; 1 van 3</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2 style="margin-bottom:10px">Productdata &amp; zoeklogica</h2>
     <div class="row gap-4" style="flex:1;align-items:stretch;min-height:0">
 
@@ -806,13 +843,13 @@ peka: {
   </div>
 
   <!-- ── CODE B: iOS FIXES ── -->
-  <div class="slide theme-white" id="scB">
-    <div class="label">Code generatie &middot; 2 van 3</div>
+  <div class="slide theme-dark" id="scB">
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Code generatie &middot; 2 van 3</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2 style="margin-bottom:10px">iOS-bugfixes in code</h2>
     <div class="row gap-4" style="flex:1;align-items:stretch;min-height:0">
 
       <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-height:0">
-        <div style="font-size:10px;font-weight:700;color:#006838;letter-spacing:.08em;text-transform:uppercase">index.css + Header.tsx &mdash; statusbalk overlapte header</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5">index.css + Header.tsx &mdash; statusbalk overlapte header</div>
         <div class="code" style="font-size:12.5px;flex:1;overflow:hidden;line-height:1.65">
 <span class="cmt">/* PROBLEEM: de iPhone-statusbalk (tijd, accu)</span>
 <span class="cmt">   viel over de groene Peka-header heen.</span>
@@ -843,7 +880,7 @@ peka: {
       </div>
 
       <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-height:0">
-        <div style="font-size:10px;font-weight:700;color:#006838;letter-spacing:.08em;text-transform:uppercase">ErrorBoundary.tsx + InstallBanner.tsx &mdash; witte pagina</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5">ErrorBoundary.tsx + InstallBanner.tsx &mdash; witte pagina</div>
         <div class="code" style="font-size:12.5px;line-height:1.65">
 <span class="cmt">/* PROBLEEM: iOS Safari (Priv&eacute;modus) gooit</span>
 <span class="cmt">   SecurityError bij localStorage-aanroep.</span>
@@ -889,7 +926,7 @@ peka: {
 
   <!-- ── CODE C: GITHUB FILE BROWSER ── -->
   <div class="slide theme-light" id="scC">
-    <div class="label">Code generatie &middot; 3 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Code generatie &middot; 3 van 3</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2 style="margin-bottom:10px">Alle bestanden op GitHub</h2>
     <div class="row gap-4" style="flex:1;align-items:stretch;min-height:0">
 
@@ -990,7 +1027,7 @@ peka: {
 
   <!-- ── GITHUB 1: WAT IS GITHUB ── -->
   <div class="slide theme-dark" id="scG1">
-    <div class="label">GitHub · 1 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">GitHub · 1 van 3</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Wat is GitHub?</h2>
     <p class="sub" style="margin-bottom:20px">GitHub is een online platform waar code wordt opgeslagen, bijgehouden en gedeeld — vergelijkbaar met Google Drive, maar specifiek voor software.</p>
     <div class="row gap-3" style="flex:1;align-items:stretch">
@@ -1015,7 +1052,7 @@ peka: {
 
   <!-- ── GITHUB 2: HOE CLAUDE INTERACTEERT ── -->
   <div class="slide theme-white" id="scG2">
-    <div class="label">GitHub · 2 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">GitHub · 2 van 3</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Hoe werkt Claude<br>met de code?</h2>
     <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
 
@@ -1106,7 +1143,7 @@ peka: {
 
   <!-- ── GITHUB 3: COMMIT HISTORY ── -->
   <div class="slide theme-green" id="scG3">
-    <div class="label">GitHub · 3 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">GitHub · 3 van 3</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Commit history —<br>elke stap bewaard</h2>
     <div class="row mt-4 gap-4" style="flex:1;align-items:stretch">
 
@@ -1194,7 +1231,7 @@ peka: {
 
   <!-- ── MOCKUP A: HOME SCHERM ── -->
   <div class="slide theme-light" id="smA">
-    <div class="label">Voorbeeld · Scherm 1 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Voorbeeld · Scherm 1 van 3</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Homescherm &amp; productlijst</h2>
     <div class="phone-wrap">
 
@@ -1282,7 +1319,7 @@ peka: {
 
   <!-- ── MOCKUP B: ZOEKEN & FILTEREN ── -->
   <div class="slide theme-dark" id="smB">
-    <div class="label">Voorbeeld · Scherm 2 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Voorbeeld · Scherm 2 van 3</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Zoeken &amp; filteren</h2>
     <div class="phone-wrap">
 
@@ -1405,7 +1442,7 @@ peka: {
 
   <!-- ── MOCKUP C: PRODUCTDETAIL ── -->
   <div class="slide theme-light" id="smC">
-    <div class="label">Voorbeeld · Scherm 3 van 3</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Voorbeeld · Scherm 3 van 3</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Productdetailpagina</h2>
     <div class="phone-wrap">
 
@@ -1482,7 +1519,7 @@ peka: {
 
   <!-- ── S8: PWA ── -->
   <div class="slide theme-green" id="s7">
-    <div class="label">Stap 7 · Progressive Web App</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 7 · Progressive Web App</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Installeerbaar<br>op iPhone</h2>
     <div class="pwa-grid">
       <div class="pwa-card">
@@ -1507,7 +1544,7 @@ peka: {
 
   <!-- ── S9: DEPLOYMENT ── -->
   <div class="slide theme-white" id="s8">
-    <div class="label">Stap 8 · Deployment</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Stap 8 · Deployment</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Live op Vercel</h2>
     <div class="deploy-steps">
       <div class="deploy-step">
@@ -1544,7 +1581,7 @@ peka: {
 
   <!-- ── S10: TIJDLIJN ── -->
   <div class="slide theme-white" id="s9">
-    <div class="label">Tijdsinvestering</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Tijdsinvestering</div><div class="claude-tag dark"><div class="claude-dot dark"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>Hoe lang heeft het geduurd?</h2>
 
     <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px">
@@ -1624,7 +1661,7 @@ peka: {
 
   <!-- ── S11: RESULT ── -->
   <div class="slide theme-green" id="s10">
-    <div class="label">Resultaat</div>
+    <div class="claude-bar"><div class="label" style="margin-bottom:0">Resultaat</div><div class="claude-tag"><div class="claude-dot"></div>Gegenereerd door Claude &mdash; geen menselijke code</div></div>
     <h2>De app is klaar 🎉</h2>
     <div class="result-stats">
       <div class="stat-box">
